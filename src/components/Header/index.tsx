@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './header.module.scss';
 import { useSelector } from 'react-redux';
-import { backgroundSelector, logoSelector, phoneSelector } from '../../features/brand/brandSlice';
-import { formatPhoneNumber } from '../../utils/const';
+import { backgroundSelector, logoSelector, phoneSelector } from '@/features/brand/brandSlice';
+import { formatPhoneNumber } from '@/utils/const';
 
 const Header = () => {
   const phone = useSelector(phoneSelector);

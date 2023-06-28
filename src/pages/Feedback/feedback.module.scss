@@ -1,0 +1,50 @@
+.feedback {
+  display: flex;
+  gap: 40px;
+  .desc {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+    img {
+      display: block;
+      width: 55%;
+      margin: 0px auto 20px;
+    }
+  }
+  .box {
+    max-width: 600px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    input,
+    textarea {
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+    textarea {
+      resize: none;
+    }
+  }
+  .btn {
+    text-align: center;
+    margin-top: 20px;
+    button {
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 7px 15px;
+      cursor: pointer;
+      transition: all 0.2s linear;
+      font-weight: 600;
+      &:hover {
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
