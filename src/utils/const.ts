@@ -13,6 +13,5 @@ export const formatPhoneNumber = (phoneNumber: string) => {
       return `${areaCode} ${prefix} ${suffix.substr(0, 3)} ${suffix.substr(3)}`;
     }
   }
-
   return phoneNumber;
 };
