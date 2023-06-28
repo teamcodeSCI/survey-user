@@ -18,17 +18,17 @@ const brandSlice = createSlice({
         case 'PR':
           state.logo = `${PUBLIC_URL}/assets/logos/logoPR.svg`;
           state.backgroundColor = 'linear-gradient(to right, #2A7CD6, #0ea5ed)';
-          state.phone = '0123456789';
+          state.phone = '19006900';
           break;
         case 'KN':
           state.logo = `${PUBLIC_URL}/assets/logos/logoKN.svg`;
           state.backgroundColor = 'linear-gradient(to right, #fb4b14, #ff6618)';
-          state.phone = '0123458689';
+          state.phone = '19006466';
           break;
         case 'HH':
           state.logo = `${PUBLIC_URL}/assets/logos/logoHH.svg`;
           state.backgroundColor = '#cb6da8';
-          state.phone = '02113868451';
+          state.phone = '1900633988';
           break;
         default:
           break;
