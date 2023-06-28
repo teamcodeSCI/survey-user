@@ -4,7 +4,7 @@
   .desc {
     text-align: center;
     font-size: 16px;
-    margin-top: 20px;
+    margin-top: 40px;
     img {
       display: block;
       width: 55%;
@@ -15,6 +15,13 @@
     max-width: 600px;
     width: 90%;
     margin: 0 auto;
+    text-align: center;
+    span {
+      font-size: 24px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 20px;
+    }
   }
   .form {
     display: flex;
@@ -22,10 +29,12 @@
     gap: 15px;
     input,
     textarea {
-      padding: 5px 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      background: #ececec;
+      border-radius: 20px;
+      padding: 13px 30px;
+      position: relative;
       outline: none;
+      border: none;
     }
     textarea {
       resize: none;
@@ -35,16 +44,30 @@
     text-align: center;
     margin-top: 20px;
     button {
+      width: 100%;
       color: #fff;
       border: none;
       border-radius: 12px;
-      padding: 7px 15px;
+      padding: 10px 20px;
       cursor: pointer;
       transition: all 0.2s linear;
       font-weight: 600;
       &:hover {
         box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
       }
+    }
+  }
+  @media (max-width: 767px) {
+    gap: 20px;
+    flex-direction: column;
+    .desc {
+      margin: 0;
+      img {
+        width: 75%;
+      }
+    }
+    .box {
+      width: 100%;
     }
   }
 }
