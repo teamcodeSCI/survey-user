@@ -1,0 +1,43 @@
+.main {
+  background: #fff;
+  padding: 5px 0;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  .box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    width: 150px;
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+  .contact {
+    button {
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 7px 15px;
+      cursor: pointer;
+      transition: all 0.2s linear;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      font-weight: 600;
+      &:hover {
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+      }
+      &::before {
+        content: '';
+        background: url(../../../public/assets/icons/phone.svg) center 0 no-repeat;
+        display: block;
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}
