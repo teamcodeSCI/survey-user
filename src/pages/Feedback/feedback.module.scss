@@ -4,7 +4,8 @@
   .desc {
     text-align: center;
     font-size: 16px;
-    margin-top: 40px;
+    margin-top: 60px;
+    width: 45%;
     img {
       display: block;
       width: 55%;
@@ -13,7 +14,7 @@
   }
   .box {
     max-width: 600px;
-    width: 90%;
+    width: 55%;
     margin: 0 auto;
     text-align: center;
     span {
@@ -58,16 +59,8 @@
     }
   }
   @media (max-width: 767px) {
-    gap: 20px;
-    flex-direction: column;
     .desc {
-      margin: 0;
-      img {
-        width: 75%;
-      }
-    }
-    .box {
-      width: 100%;
+      display: none;
     }
   }
 }

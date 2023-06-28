@@ -14,7 +14,7 @@ const Feedback = () => {
         <img src={logo} alt="" />
         <p>
           Xin chào quý khách ! <br /> Cảm ơn Quý khách đã sử dụng dịch vụ của {name}. <br />
-          Chúng tôi vô cùng biết ơn nếu bạn để lại nhận xét về trải nghiệm của bạn tại đây
+          Chúng tôi vô cùng biết ơn nếu bạn để lại nhận xét về trải nghiệm của bạn tại đây !
         </p>
         <span>
           <i>Hotline:</i> <b style={{ color: backgroundColor }}>{phone}</b>

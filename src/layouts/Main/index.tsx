@@ -9,7 +9,7 @@ const Main = () => {
   const dispatch = useDispatch();
   const background = useSelector(backgroundSelector);
   useEffect(() => {
-    dispatch(brandSlice.actions.getBrand({ brandCode: 'KN' }));
+    dispatch(brandSlice.actions.getBrand({ brandCode: 'PR' }));
   }, [dispatch]);
   return (
     <div style={{ background: background }} className={style['main']}>
