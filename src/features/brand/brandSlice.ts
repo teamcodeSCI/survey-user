@@ -10,7 +10,7 @@ interface InitialState {
 const initialState: InitialState = { logo: '', backgroundColor: '', phone: '', name: '' };
 
 const brandSlice = createSlice({
-  name: 'brands',
+  name: 'brand',
   initialState,
   reducers: {
     getBrand: (state, action) => {

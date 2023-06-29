@@ -1,4 +1,6 @@
 export const PUBLIC_URL = process.env.PUBLIC_URL;
+export const API_URL: string = 'https://scigroup.com.vn/app/survey-web/api/';
+export const TOKEN: string = '9a9af5b8174facde56cdb07e803c9f16';
 
 export const formatPhoneNumber = (phoneNumber: string) => {
   const cleaned = phoneNumber.replace(/\D/g, '');
