@@ -11,6 +11,9 @@
       width: 55%;
       margin: 0px auto 20px;
     }
+    b {
+      cursor: pointer;
+    }
   }
   .box {
     max-width: 600px;
@@ -44,6 +47,11 @@
   .btn {
     text-align: center;
     margin-top: 20px;
+    p {
+      margin-bottom: 15px;
+      color: red;
+      font-style: italic;
+    }
     button {
       width: 100%;
       color: #fff;
@@ -53,6 +61,7 @@
       cursor: pointer;
       transition: all 0.2s linear;
       font-weight: 600;
+      font-size: 16px;
       &:hover {
         box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
       }
