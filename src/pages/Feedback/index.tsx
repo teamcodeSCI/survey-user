@@ -40,7 +40,7 @@ const Feedback = () => {
         <span>
           <i>Hotline:</i>
           <b style={{ color: backgroundColor }} onClick={handleCall}>
-            {phone}
+            {' ' + phone}
           </b>
         </span>
       </div>
