@@ -1,0 +1,29 @@
+.ending {
+  padding: 40px;
+  .img {
+    max-width: 230px;
+    width: 90%;
+    margin: 0 auto 20px;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+  .text {
+    text-align: center;
+    font-size: 16px;
+    p {
+      margin: 20px 0 0;
+    }
+  }
+  @media (max-width: 767px) {
+    padding: 0px;
+    .img {
+      width: 80%;
+    }
+    .text {
+      font-size: 15px;
+    }
+  }
+}
