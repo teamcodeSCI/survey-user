@@ -1,49 +1,43 @@
 import React, { useEffect } from 'react';
 import style from './main.module.scss';
 
-import brandSlice, { backgroundSelector } from '@/features/brand/brandSlice';
+import brandSlice, { backgroundSelector, loadedSelector } from '@/features/brand/brandSlice';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
-import { fetchSurvey } from '@/apis/survey';
+
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { brandCodeSelector, loadedSurveySelector, loadingSurveySelector } from '@/features/survey/surveySlice';
-import Loading from '@/components/Loading';
+import PageNotFound from '@/pages/PageNotFound';
 
 const Main = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const id = searchParams.get('id');
+  const brandCode = searchParams.get('brand_code');
   const dispatch = useAppDispatch();
-  const brandCode = useAppSelector(brandCodeSelector);
   const background = useAppSelector(backgroundSelector);
-  const surveyLoaded = useAppSelector(loadedSurveySelector);
-  const surveyLoading = useAppSelector(loadingSurveySelector);
+  const loaded = useAppSelector(loadedSelector);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchSurvey(Number(id)));
-      if (surveyLoaded) {
-        dispatch(brandSlice.actions.getBrand({ brandCode: brandCode }));
-      }
+    if (brandCode) {
+      dispatch(brandSlice.actions.getBrand({ brandCode: brandCode.toUpperCase() }));
     } else {
       navigate('/not-found');
     }
-  }, [dispatch, id, brandCode, surveyLoaded, navigate]);
+  }, [dispatch, brandCode, navigate, background, loaded]);
   return (
-    <div style={{ background: background }} className={style['main']}>
-      <div className={style['layout']}>
-        <div className="container">
-          {surveyLoading ? (
-            <Loading />
-          ) : (
-            surveyLoaded && (
+    <>
+      {loaded ? (
+        <div style={{ background: background }} className={style['main']}>
+          <div className={style['layout']}>
+            <div className="container">
               <div className={style['wrapper']}>
                 <Outlet />
               </div>
-            )
-          )}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <PageNotFound />
+      )}
+    </>
   );
 };
 
