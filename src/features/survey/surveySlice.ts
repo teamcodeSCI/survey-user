@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   loaded: false,
   loading: false,
-  error: '',
+
   surveyId: '',
   brandCode: '',
   questionList: [],
@@ -22,10 +22,12 @@ const surveySLice = createSlice({
       })
       .addCase(fetchSurvey.fulfilled, (state, action: any) => {
         state.loading = false;
-        state.loaded = true;
-        state.brandCode = action.payload.data.data[0].brand_code;
-        state.surveyId = action.payload.data.data[0].id;
-        state.questionList = action.payload.data.data[0].question_ids;
+        if (action.payload.data.data) {
+          state.loaded = true;
+          state.brandCode = action.payload.data.data[0].brand_code;
+          state.surveyId = action.payload.data.data[0].id;
+          state.questionList = action.payload.data.data[0].question_ids;
+        }
       })
       .addCase(fetchSurvey.rejected, (state, action) => {
         state.loading = false;
