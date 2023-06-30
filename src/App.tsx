@@ -4,6 +4,7 @@ import Main from './layouts/Main';
 import Feedback from './pages/Feedback';
 import Survey from './pages/Survey';
 import Ending from './pages/Ending';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Route path="/ending" element={<Ending />} />
         <Route path="/" element={<Navigate to={'/feedback'} />} />
       </Route>
-      <Route path="*" element={'Page not found'} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

@@ -34,7 +34,8 @@ const Feedback = () => {
       <div className={style['desc']}>
         <img src={logo} alt="" />
         <p>
-          Xin chào quý khách ! <br /> Cảm ơn Quý khách đã sử dụng dịch vụ của {name}. <br />
+          <b> Xin chào quý khách ! </b>
+          <br /> Cảm ơn Quý khách đã sử dụng dịch vụ của {name}. <br />
           Chúng tôi vô cùng biết ơn nếu bạn để lại nhận xét về trải nghiệm của bạn tại đây !
         </p>
         <span>

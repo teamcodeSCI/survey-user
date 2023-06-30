@@ -3,13 +3,15 @@
   gap: 40px;
   .desc {
     text-align: center;
-    font-size: 16px;
-    margin-top: 60px;
-    width: 45%;
+    font-size: 18px;
+    margin-top: 70px;
+    width: 50%;
+    line-height: 31px;
+    padding: 0 20px;
     img {
       display: block;
-      width: 55%;
-      margin: 0px auto 20px;
+      width: 57%;
+      margin: 0px auto 40px;
     }
     b {
       cursor: pointer;
@@ -17,12 +19,12 @@
   }
   .box {
     max-width: 600px;
-    width: 55%;
+    width: 50%;
     margin: 0 auto;
     text-align: center;
     span {
-      font-size: 24px;
-      font-weight: 600;
+      font-size: 30px;
+      text-transform: uppercase;
       display: block;
       margin-bottom: 20px;
     }
@@ -30,12 +32,12 @@
   .form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     input,
     textarea {
       background: #ececec;
-      border-radius: 20px;
-      padding: 13px 30px;
+      border-radius: 25px;
+      padding: 13px 20px;
       position: relative;
       outline: none;
       border: none;
@@ -53,15 +55,15 @@
       font-style: italic;
     }
     button {
-      width: 100%;
       color: #fff;
       border: none;
       border-radius: 12px;
-      padding: 10px 20px;
+      padding: 10px 30px;
       cursor: pointer;
       transition: all 0.2s linear;
       font-weight: 600;
       font-size: 16px;
+      text-transform: uppercase;
       &:hover {
         box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
       }

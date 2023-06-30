@@ -37,3 +37,4 @@ export default surveySLice;
 export const questionListSelector = (state: RootState) => state.survey.questionList;
 export const brandCodeSelector = (state: RootState) => state.survey.brandCode;
 export const loadedSurveySelector = (state: RootState) => state.survey.loaded;
+export const loadingSurveySelector = (state: RootState) => state.survey.loading;
