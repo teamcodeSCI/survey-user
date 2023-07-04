@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { loadedSurveySelector } from '@/features/survey/surveySlice';
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import style from './survey.module.scss';
+import ReactQuestion from '@/components/ReactQuestion';
 
 const Survey = () => {
   const dispatch = useAppDispatch();
@@ -19,10 +21,10 @@ const Survey = () => {
     }
   }, [dispatch, id, navigate]);
   return (
-    <div className="survey">
+    <div className={style['survey']}>
       {loaded && (
-        <div className="main">
-          <div className=""></div>
+        <div className={style['main']}>
+          <ReactQuestion />
         </div>
       )}
     </div>

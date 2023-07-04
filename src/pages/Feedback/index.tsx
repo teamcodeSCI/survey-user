@@ -48,8 +48,22 @@ const Feedback = () => {
       <div className={style['box']}>
         <span style={{ color: backgroundColor }}>Góp ý phản hồi</span>
         <div className={style['form']}>
-          <input type="text" name="name" placeholder="Họ và tên" value={info.name} onChange={handleInfo} />
-          <input type="text" name="phone" placeholder="Số điện thoại" value={info.phone} onChange={handleInfo} />
+          <input
+            type="text"
+            name="name"
+            autoComplete="off"
+            placeholder="Họ và tên"
+            value={info.name}
+            onChange={handleInfo}
+          />
+          <input
+            type="text"
+            name="phone"
+            autoComplete="off"
+            placeholder="Số điện thoại"
+            value={info.phone}
+            onChange={handleInfo}
+          />
           <textarea
             name="feedback"
             rows={10}
