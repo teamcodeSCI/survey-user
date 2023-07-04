@@ -1,0 +1,52 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 7px;
+    li {
+      cursor: pointer;
+      display: block;
+      width: 60px;
+      height: 6px;
+      border-radius: 2px;
+      background: #ccc;
+      &:hover {
+        background: linear-gradient(118deg, #227ff4, #227ff4b2) !important;
+      }
+    }
+  }
+  &__active {
+    background: linear-gradient(118deg, #227ff4, #227ff4b2) !important;
+  }
+  &__btn {
+    font-size: 15px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #797878;
+  }
+  @media (max-width: 767px) {
+    ul {
+      li {
+        width: 30px;
+      }
+    }
+    &__btn {
+      span {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 320px) {
+    ul {
+      li {
+        width: 23px;
+      }
+    }
+  }
+}

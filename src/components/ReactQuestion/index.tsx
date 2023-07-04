@@ -1,26 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './reactQuestion.module.scss';
-import { useAppSelector } from '@/app/hooks';
-import { backgroundSelector, logoSelector } from '@/features/brand/brandSlice';
+import { reactIcon } from '@/utils/const';
 
 const ReactQuestion = () => {
-  const logo = useAppSelector(logoSelector);
-
-  const background = useAppSelector(backgroundSelector);
+  const [answer, setAnswer] = useState<number>(0);
   return (
     <div className={style['react']}>
-      <div className={style['logo']}>
-        <img src={logo} alt="" />
-      </div>
       <p>1. Quý khách có trải nghiệm dịch vụ như thế nào?</p>
-      <div className="answer">
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
+      <div className={style['answer']}>
+        {reactIcon.map((item) => (
+          <button
+            style={item.value === answer ? { background: '#dcecff' } : {}}
+            key={item.value}
+            onClick={() => setAnswer(item.value)}
+          >
+            <img width={40} height={40} src={item.icon} alt="" />
+            <span>{item.name}</span>
+          </button>
+        ))}
       </div>
-      <button style={{ background: background }}>Bắt đầu khảo sát</button>
     </div>
   );
 };

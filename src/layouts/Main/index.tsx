@@ -26,11 +26,9 @@ const Main = () => {
     <>
       {loaded ? (
         <div style={{ background: background }} className={style['main']}>
-          <div className={style['layout']}>
-            <div className="container">
-              <div className={style['wrapper']}>
-                <Outlet />
-              </div>
+          <div className="container">
+            <div className={style['wrapper']}>
+              <Outlet />
             </div>
           </div>
         </div>

@@ -4,9 +4,8 @@
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  .layout {
-    margin: 15vh 0 0;
-  }
+  align-items: center;
+
   .wrapper {
     padding: 40px 30px;
     background: #fff;
@@ -14,12 +13,12 @@
     box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   }
   @media (max-width: 767px) {
-    display: block;
     .layout {
       margin: 0;
       padding: 40px 15px 0;
     }
     .wrapper {
+      margin: 20px 0;
       padding: 20px 15px;
     }
   }

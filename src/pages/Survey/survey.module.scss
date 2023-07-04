@@ -1,0 +1,28 @@
+.survey {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .logo {
+    width: 80%;
+    max-width: 200px;
+    margin: 0 auto;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+  @media (max-width: 767px) {
+    height: 60vh;
+  }
+  @media (max-width: 320px) {
+    height: unset;
+    .logo {
+      margin-bottom: 20px;
+    }
+    .pagination {
+      margin-top: 20px;
+    }
+  }
+}
