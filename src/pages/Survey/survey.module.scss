@@ -13,8 +13,17 @@
       height: auto;
     }
   }
+  .pagination {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: end;
+  }
   @media (max-width: 767px) {
     height: 60vh;
+    .pagination {
+      height: auto;
+    }
   }
   @media (max-width: 320px) {
     height: unset;

@@ -7,6 +7,8 @@ import style from './survey.module.scss';
 import ReactQuestion from '@/components/ReactQuestion';
 import Pagination from '@/components/Pagination';
 import { logoSelector } from '@/features/brand/brandSlice';
+import TextQuestion from '@/components/TextQuestion';
+import NumberQuestion from '@/components/NumberQuestion';
 
 const Survey = () => {
   const [pageNum, setPageNum] = useState<number>(1);
@@ -29,7 +31,7 @@ const Survey = () => {
       <div className={style['logo']}>
         <img src={logo} alt="" />
       </div>
-      {loaded && <ReactQuestion />}
+      {loaded && <NumberQuestion />}
       <div className={style['pagination']}>
         <Pagination pageNum={pageNum} setPageNum={setPageNum} pageCount={5} range={5} />
       </div>

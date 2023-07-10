@@ -1,0 +1,22 @@
+.textQuestion {
+  max-width: 800px;
+  width: 90%;
+  margin: 0 auto;
+  p {
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+  input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    padding: 7px 5px;
+  }
+  @media (max-width: 320px) {
+    margin: 20px auto;
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  }
+}

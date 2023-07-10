@@ -1,4 +1,5 @@
 .pagination {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,6 +30,10 @@
     background: none;
     border: none;
     color: #797878;
+    transition: all 0.1s linear;
+    &:hover {
+      color: #227ff4;
+    }
   }
   @media (max-width: 767px) {
     ul {
