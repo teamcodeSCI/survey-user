@@ -40,9 +40,15 @@ const Pagination = ({ pageNum, setPageNum, pageCount, range }: PaginationModel) 
           ></li>
         ))}
       </ul>
-      <button className="pagination__btn" onClick={nextPage}>
-        <span>Câu tiếp</span> ❯❯
-      </button>
+      {pageNum === pageCount ? (
+        <button className="pagination__btn" onClick={nextPage}>
+          <span>Gửi kết quả</span> ❯❯
+        </button>
+      ) : (
+        <button className="pagination__btn" onClick={nextPage}>
+          <span>Câu tiếp</span> ❯❯
+        </button>
+      )}
     </div>
   );
 };

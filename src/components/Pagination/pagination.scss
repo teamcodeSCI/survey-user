@@ -31,6 +31,8 @@
     border: none;
     color: #797878;
     transition: all 0.1s linear;
+    max-width: 120px;
+    min-width: 120px;
     &:hover {
       color: #227ff4;
     }
@@ -42,6 +44,8 @@
       }
     }
     &__btn {
+      max-width: 30px;
+      min-width: 30px;
       span {
         display: none;
       }
