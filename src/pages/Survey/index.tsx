@@ -9,7 +9,7 @@ import Pagination from '@/components/Pagination';
 import { logoSelector } from '@/features/brand/brandSlice';
 import TextQuestion from '@/components/TextQuestion';
 import NumberQuestion from '@/components/NumberQuestion';
-import StarQuestion from '@/components/StarQuestion';
+// import StarQuestion from '@/components/StarQuestion';
 import Start from '@/components/Start';
 
 const Survey = () => {
@@ -37,10 +37,10 @@ const Survey = () => {
   if (loaded) {
     switch (currentItems[0].question_type) {
       case 'simple_choice':
-        if (currentItems[0].answer.length <= 6) {
-          questionType = <ReactQuestion question={currentItems[0].title} answers={currentItems[0].answer} />;
+        if (currentItems[0].col_nb === '10') {
+          questionType = <NumberQuestion question={currentItems[0].title} />;
         } else {
-          questionType = <NumberQuestion />;
+          questionType = <ReactQuestion question={currentItems[0].title} answers={currentItems[0].answer} />;
         }
         break;
       case 'free_text':
@@ -49,8 +49,7 @@ const Survey = () => {
       case 'textbox':
         questionType = <TextQuestion question={currentItems[0].title} />;
         break;
-      case 'multiple_choice':
-        questionType = <NumberQuestion />;
+      default:
         break;
     }
   }
@@ -74,7 +73,9 @@ const Survey = () => {
           </div>
         </div>
       ) : (
-        <Start handleIsStart={handleIsStart} />
+        <div>
+          <Start handleIsStart={handleIsStart} />
+        </div>
       )}
     </>
   );
