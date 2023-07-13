@@ -24,6 +24,7 @@ const Survey = () => {
   const indexOfLastItem = pageNum * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems: any = loaded ? questionList.slice(indexOfFirstItem, indexOfLastItem) : [];
+  console.log('currentItems: ', questionList);
 
   const pageCount = loaded ? Math.ceil(questionList.length / itemPerPage) : 0;
   const logo = useAppSelector(logoSelector);
@@ -40,7 +41,8 @@ const Survey = () => {
         if (currentItems[0].col_nb === '10') {
           questionType = <NumberQuestion question={currentItems[0].title} />;
         } else {
-          questionType = <ReactQuestion question={currentItems[0].title} answers={currentItems[0].answer} />;
+          if (currentItems[0].icon)
+            questionType = <ReactQuestion question={currentItems[0].title} answers={currentItems[0].answer} />;
         }
         break;
       case 'free_text':
