@@ -5,7 +5,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   loaded: false,
   loading: false,
-
   surveyId: '',
   brandCode: '',
   questionList: [],

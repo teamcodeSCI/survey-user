@@ -24,16 +24,18 @@ const Survey = () => {
   const indexOfLastItem = pageNum * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems: any = loaded ? questionList.slice(indexOfFirstItem, indexOfLastItem) : [];
-  console.log('currentItems: ', questionList);
 
   const pageCount = loaded ? Math.ceil(questionList.length / itemPerPage) : 0;
   const logo = useAppSelector(logoSelector);
   const [searchParams] = useSearchParams();
+  const brandCode = searchParams.get('brand_code');
   const id = searchParams.get('id');
   const handleIsStart: React.MouseEventHandler = () => {
     setIsStart(!isStart);
   };
-
+  const sendResult = () => {
+    navigate(`/ending?brand_code=${brandCode}`);
+  };
   let questionType: any = '';
   if (loaded) {
     switch (currentItems[0].question_type) {
@@ -71,7 +73,13 @@ const Survey = () => {
           </div>
           {questionType}
           <div className={style['pagination']}>
-            <Pagination pageNum={pageNum} setPageNum={setPageNum} pageCount={pageCount} range={pageCount} />
+            <Pagination
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+              pageCount={pageCount}
+              range={pageCount}
+              sendResult={sendResult}
+            />
           </div>
         </div>
       ) : (

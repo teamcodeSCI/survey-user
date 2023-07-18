@@ -4,11 +4,12 @@ import { useAppSelector } from '@/app/hooks';
 import { backgroundSelector } from '@/features/brand/brandSlice';
 interface PaginationModel {
   pageNum: number;
-  setPageNum: any;
+  setPageNum: (pageNum: number) => void;
   pageCount: number;
   range: number;
+  sendResult: () => void;
 }
-const Pagination = ({ pageNum, setPageNum, pageCount, range }: PaginationModel) => {
+const Pagination = ({ pageNum, setPageNum, pageCount, range, sendResult }: PaginationModel) => {
   const background = useAppSelector(backgroundSelector);
   const pagiPage = [];
   const pagiRange = pageCount <= range ? pageCount - 1 : range;
@@ -41,7 +42,7 @@ const Pagination = ({ pageNum, setPageNum, pageCount, range }: PaginationModel) 
         ))}
       </ul>
       {pageNum === pageCount ? (
-        <button className="pagination__btn" onClick={nextPage}>
+        <button className="pagination__btn" onClick={sendResult}>
           <span>Gửi kết quả</span> ❯❯
         </button>
       ) : (

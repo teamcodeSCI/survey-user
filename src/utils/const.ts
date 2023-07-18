@@ -11,19 +11,3 @@ export const reactIcon: ReactIcon[] = [
   { name: 'Trên cả ước muốn', icon: `${PUBLIC_URL}/assets/icons/happy-react.svg`, value: 5 },
   { name: 'Quá tuyệt vời', icon: `${PUBLIC_URL}/assets/icons/perfect-react.svg`, value: 6 },
 ];
-
-export const formatPhoneNumber = (phoneNumber: string) => {
-  const cleaned = phoneNumber.replace(/\D/g, '');
-  const isValidVietnameseNumber = /^0\d{8,9}$/.test(cleaned);
-  if (isValidVietnameseNumber) {
-    const areaCode = cleaned.substr(0, 2);
-    const prefix = cleaned.substr(2, 3);
-    const suffix = cleaned.substr(5);
-    if (cleaned.length === 8) {
-      return `${areaCode} ${prefix} ${suffix}`;
-    } else if (cleaned.length === 9) {
-      return `${areaCode} ${prefix} ${suffix.substr(0, 3)} ${suffix.substr(3)}`;
-    }
-  }
-  return phoneNumber;
-};
