@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import style from './reactQuestion.module.scss';
 import { PUBLIC_URL } from '@/utils/const';
 
-type Answer = {
+interface Answer {
   id: number;
   question_id: number;
   value: string;
   value_description: string;
-};
+}
 interface ReactQuestionState {
   question: string;
   answers: Answer[];
