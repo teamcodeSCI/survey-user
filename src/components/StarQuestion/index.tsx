@@ -10,12 +10,11 @@ interface StarQuestionProps {
 const StarQuestion = ({ question, answer, row }: StarQuestionProps) => {
   const data: any = [];
 
-  answer.forEach((item, idx) => {
+  row.forEach((item) => {
     const newData: any = { ...item, answer: '' };
     newData.answer = answer;
     data.push(newData);
   });
-
   return (
     <div className={style['starQuestion']}>
       <p>{question}</p>
