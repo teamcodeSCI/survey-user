@@ -9,8 +9,8 @@ import Pagination from '@/components/Pagination';
 import { logoSelector } from '@/features/brand/brandSlice';
 import TextQuestion from '@/components/TextQuestion';
 import NumberQuestion from '@/components/NumberQuestion';
-// import StarQuestion from '@/components/StarQuestion';
 import Start from '@/components/Start';
+import StarQuestion from '@/components/StarQuestion';
 
 const Survey = () => {
   const [pageNum, setPageNum] = useState<number>(1);
@@ -24,7 +24,7 @@ const Survey = () => {
   const indexOfLastItem = pageNum * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems: any = loaded ? questionList.slice(indexOfFirstItem, indexOfLastItem) : [];
-
+  console.log(currentItems);
   const pageCount = loaded ? Math.ceil(questionList.length / itemPerPage) : 0;
   const logo = useAppSelector(logoSelector);
   const [searchParams] = useSearchParams();
@@ -52,6 +52,11 @@ const Survey = () => {
         break;
       case 'textbox':
         questionType = <TextQuestion question={currentItems[0].title} />;
+        break;
+      case 'matrix':
+        questionType = (
+          <StarQuestion question={currentItems[0].title} answer={currentItems[0].answer} row={currentItems[0].row} />
+        );
         break;
       default:
         break;

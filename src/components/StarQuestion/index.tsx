@@ -2,20 +2,26 @@ import React from 'react';
 import style from './starQuestion.module.scss';
 import StarAnswer from '../StarAnswer';
 
-const data = [
-  { name: 'Lễ tân', answer: [1, 2, 3, 4, 5] },
-  { name: 'Điều dưỡng', answer: [1, 2, 3, 4, 5] },
-  { name: 'Bác sĩ', answer: [1, 2, 3, 4, 5] },
-  { name: 'Thu ngân', answer: [1, 2, 3, 4, 5] },
-  { name: 'Bảo vệ', answer: [1, 2, 3, 4, 5] },
-];
-const StarQuestion = () => {
+interface StarQuestionProps {
+  question: string;
+  answer: any[];
+  row: any[];
+}
+const StarQuestion = ({ question, answer, row }: StarQuestionProps) => {
+  const data: any = [];
+
+  answer.forEach((item, idx) => {
+    const newData: any = { ...item, answer: '' };
+    newData.answer = answer;
+    data.push(newData);
+  });
+
   return (
     <div className={style['starQuestion']}>
-      <p>2.Quý khách đánh giá về mức độ hài lòng về các bộ phận ?</p>
+      <p>{question}</p>
       <div className={style['starAnswer']}>
-        {data.map((item, idx) => (
-          <StarAnswer key={idx} question={item} />
+        {data.map((item: any, idx: number) => (
+          <StarAnswer key={idx} name={item.value} answer={item.answer} />
         ))}
       </div>
     </div>

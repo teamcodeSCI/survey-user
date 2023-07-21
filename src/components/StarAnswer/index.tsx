@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import style from './starAnswer.module.scss';
 
 interface StarAnswerProps {
-  question: { name: string; answer: number[] };
+  name: string;
+  answer: any;
 }
-const StarAnswer = ({ question }: StarAnswerProps) => {
+const StarAnswer = ({ name, answer }: StarAnswerProps) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   return (
     <div className={style['starAnswer']}>
-      <div className={style['title']}>{question.name}</div>
+      <div className={style['title']}>{name}: </div>
       <div className={style['answer']}>
-        {question.answer.map((star) => (
+        {answer.map((star: any) => (
           <button
-            key={star}
-            className={star <= (hover || rating) ? style['on'] : style['off']}
-            onClick={() => setRating(star)}
-            onMouseEnter={() => setHover(star)}
+            key={Number(star.value)}
+            className={Number(star.value) <= (hover || rating) ? style['on'] : style['off']}
+            onClick={() => setRating(Number(star.value))}
+            onMouseEnter={() => setHover(Number(star.value))}
             onMouseLeave={() => setHover(rating)}
           >
             <span>&#9733;</span>
