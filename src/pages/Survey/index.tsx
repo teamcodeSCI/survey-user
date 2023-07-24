@@ -1,6 +1,6 @@
 import { fetchSurvey } from '@/apis/survey';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { loadedSurveySelector, questionListSelector } from '@/features/survey/surveySlice';
+import { loadedSurveySelector, loadingSurveySelector, questionListSelector } from '@/features/survey/surveySlice';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import style from './survey.module.scss';
@@ -11,6 +11,7 @@ import TextQuestion from '@/components/TextQuestion';
 import NumberQuestion from '@/components/NumberQuestion';
 import Start from '@/components/Start';
 import StarQuestion from '@/components/StarQuestion';
+import Loading from '@/components/Loading';
 
 const Survey = () => {
   const [pageNum, setPageNum] = useState<number>(1);
@@ -18,6 +19,7 @@ const Survey = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loaded = useAppSelector(loadedSurveySelector);
+  const loading = useAppSelector(loadingSurveySelector);
   const questionList = useAppSelector(questionListSelector);
 
   const itemPerPage = 1;
@@ -75,7 +77,7 @@ const Survey = () => {
           <div className={style['logo']}>
             <img src={logo} alt="" />
           </div>
-          {questionType}
+          {!loading ? loaded && questionType : <Loading />}
           <div className={style['pagination']}>
             <Pagination
               pageNum={pageNum}
