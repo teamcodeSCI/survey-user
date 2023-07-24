@@ -55,9 +55,7 @@ const Survey = () => {
         questionType = <TextQuestion question={currentItems[0].title} />;
         break;
       case 'matrix':
-        questionType = (
-          <StarQuestion question={currentItems[0].title} answer={currentItems[0].answer} row={currentItems[0].row} />
-        );
+        questionType = <StarQuestion question={currentItems[0].title} answer={currentItems[0].answer} row={currentItems[0].row} />;
         break;
       default:
         break;
