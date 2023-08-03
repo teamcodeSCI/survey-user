@@ -1,0 +1,23 @@
+.multiQuestion {
+  max-width: 800px;
+  width: 90%;
+  margin: 0 auto;
+  p {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .answer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    label {
+      cursor: pointer;
+    }
+  }
+}

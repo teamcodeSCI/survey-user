@@ -12,6 +12,8 @@ import NumberQuestion from '@/components/NumberQuestion';
 import Start from '@/components/Start';
 import StarQuestion from '@/components/StarQuestion';
 import Loading from '@/components/Loading';
+import MultiQuestion from '@/components/MultiQuestion';
+import SimpleQuestion from '@/components/SimpleQuestion';
 
 const Survey = () => {
   const [pageNum, setPageNum] = useState<number>(1);
@@ -21,6 +23,7 @@ const Survey = () => {
   const loaded = useAppSelector(loadedSurveySelector);
   const loading = useAppSelector(loadingSurveySelector);
   const questionList = useAppSelector(questionListSelector);
+  console.log("questionList: ", questionList);
 
   const itemPerPage = 1;
   const indexOfLastItem = pageNum * itemPerPage;
@@ -44,8 +47,8 @@ const Survey = () => {
         if (currentItems[0].col_nb === '10') {
           questionType = <NumberQuestion question={currentItems[0].title} />;
         } else {
-          if (currentItems[0].icon)
-            questionType = <ReactQuestion question={currentItems[0].title} answers={currentItems[0].answer} />;
+          if (currentItems[0].icon) questionType = <ReactQuestion question={currentItems[0].title} answers={currentItems[0].answer} />;
+          else questionType = <SimpleQuestion question={currentItems[0].title} answer={currentItems[0].answer} />
         }
         break;
       case 'free_text':
@@ -56,6 +59,9 @@ const Survey = () => {
         break;
       case 'matrix':
         questionType = <StarQuestion question={currentItems[0].title} answer={currentItems[0].answer} row={currentItems[0].row} />;
+        break;
+      case 'multiple_choice':
+        questionType = <MultiQuestion question={currentItems[0].title} answer={currentItems[0].answer} />
         break;
       default:
         break;

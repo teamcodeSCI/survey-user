@@ -16,9 +16,6 @@
       height: 6px;
       border-radius: 2px;
       background: #ccc;
-      &:hover {
-        background: linear-gradient(118deg, #227ff4, #227ff4b2) !important;
-      }
     }
   }
   &__active {
@@ -33,9 +30,6 @@
     transition: all 0.1s linear;
     max-width: 120px;
     min-width: 120px;
-    &:hover {
-      color: #227ff4;
-    }
   }
   @media (max-width: 767px) {
     ul {
