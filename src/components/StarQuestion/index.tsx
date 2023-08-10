@@ -3,21 +3,19 @@ import style from './starQuestion.module.scss';
 import StarAnswer from '../StarAnswer';
 
 interface StarQuestionProps {
-  question: string;
-  answer: any[];
-  row: any[];
+  currentItem: any
 }
-const StarQuestion = ({ question, answer, row }: StarQuestionProps) => {
+const StarQuestion = ({ currentItem }: StarQuestionProps) => {
   const data: any = [];
 
-  row.forEach((item) => {
+  currentItem.row.forEach((item: any) => {
     const newData: any = { ...item, answer: '' };
-    newData.answer = answer;
+    newData.answer = currentItem.answer;
     data.push(newData);
   });
   return (
     <div className={style['starQuestion']}>
-      <p>{question}</p>
+      <p>{currentItem.title}</p>
       <div className={style['starAnswer']}>
         {data.map((item: any, idx: number) => (
           <StarAnswer key={idx} name={item.value} answer={item.answer} />

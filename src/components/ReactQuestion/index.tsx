@@ -9,15 +9,13 @@ interface Answer {
   value_description: string;
 }
 interface ReactQuestionState {
-  question: string;
-  answers: Answer[];
+  currentItem: any
 }
 
-const ReactQuestion = ({ question, answers }: ReactQuestionState) => {
+const ReactQuestion = ({ currentItem }: ReactQuestionState) => {
   const [answer, setAnswer] = useState<number>(0);
   const newAnswers: any = [];
-
-  answers.forEach((item: any) => {
+  currentItem.answer.forEach((item: any) => {
     const newAnswer: Answer & { icon: string } = {
       ...item,
       icon: '',
@@ -49,7 +47,7 @@ const ReactQuestion = ({ question, answers }: ReactQuestionState) => {
 
   return (
     <div className={style['react']}>
-      <p>{question}</p>
+      <p>{currentItem.question}</p>
       <div className={style['answer']}>
         {newAnswers.map((item: any) => (
           <button

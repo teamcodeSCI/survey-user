@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import style from './numberQuestion.module.scss';
 import { useAppSelector } from '@/app/hooks';
 import { backgroundSelector } from '@/features/brand/brandSlice';
+import { PostSurvey } from '@/models/survey';
 interface NumberQuestionProps {
-  question: string;
+  currentItem: any,
+  setCreateSurvey: React.Dispatch<React.SetStateAction<PostSurvey>>, createSurvey: PostSurvey
 }
-const NumberQuestion = ({ question }: NumberQuestionProps) => {
+const NumberQuestion = ({ setCreateSurvey, createSurvey, currentItem }: NumberQuestionProps) => {
   const background = useAppSelector(backgroundSelector);
   const [answer, setAnswer] = useState(0);
   const [hover, setHover] = useState(0);
   const data: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div className={style['numberQuestion']}>
-      <p>{question}</p>
+      <p>{currentItem.question}</p>
       <div className={style['numberAnswer']}>
         {data.map((item) => (
           <button

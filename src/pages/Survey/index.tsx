@@ -1,4 +1,4 @@
-import { fetchSurvey } from '@/apis/survey';
+import { fetchSurvey, postSurvey } from '@/apis/survey';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { loadedSurveySelector, loadingSurveySelector, questionListSelector } from '@/features/survey/surveySlice';
 import React, { useEffect, useState } from 'react';
@@ -14,16 +14,35 @@ import StarQuestion from '@/components/StarQuestion';
 import Loading from '@/components/Loading';
 import MultiQuestion from '@/components/MultiQuestion';
 import SimpleQuestion from '@/components/SimpleQuestion';
+import { PostSurvey } from '@/models/survey';
+import { loadedPostSurveySelector } from '@/features/survey/postSurveySlice';
 
+
+const initSurvey = {
+  id: 0,
+  state: '',
+
+  question_id: 0,
+  suggested_answer_id: 0,
+  matrix_row_id: 0,
+  answer_type: '',
+  value_datetime: '',
+  value_date: '',
+  value_text_box: '',
+  value_numberical_box: '',
+  value_char_box: ''
+}
 const Survey = () => {
   const [pageNum, setPageNum] = useState<number>(1);
   const [isStart, setIsStart] = useState<boolean>(false);
+  const [createSurvey, setCreateSurvey] = useState<PostSurvey>(initSurvey)
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loaded = useAppSelector(loadedSurveySelector);
+  const loadedPostSurvey = useAppSelector(loadedPostSurveySelector)
   const loading = useAppSelector(loadingSurveySelector);
   const questionList = useAppSelector(questionListSelector);
-  console.log("questionList: ", questionList);
+
 
   const itemPerPage = 1;
   const indexOfLastItem = pageNum * itemPerPage;
@@ -35,7 +54,20 @@ const Survey = () => {
   const brandCode = searchParams.get('brand_code');
   const id = searchParams.get('id');
   const handleIsStart: React.MouseEventHandler = () => {
-    setIsStart(!isStart);
+    // questionList.forEach((item: any) => dispatch(postSurvey({
+    //   id: item.survey_id,
+    //   state: 'new',
+    //   question_id: item.id,
+    //   suggested_answer_id: 0,
+    //   matrix_row_id: 0,
+    //   answer_type: '',
+    //   value_datetime: '',
+    //   value_date: '',
+    //   value_text_box: '',
+    //   value_numberical_box: '',
+    //   value_char_box: ''
+    // })))
+    setIsStart(true);
   };
   const sendResult = () => {
     navigate(`/ending?brand_code=${brandCode}`);
@@ -45,23 +77,23 @@ const Survey = () => {
     switch (currentItems[0].question_type) {
       case 'simple_choice':
         if (currentItems[0].col_nb === '10') {
-          questionType = <NumberQuestion question={currentItems[0].title} />;
+          questionType = <NumberQuestion currentItem={currentItems[0]} setCreateSurvey={setCreateSurvey} createSurvey={createSurvey} />;
         } else {
-          if (currentItems[0].icon) questionType = <ReactQuestion question={currentItems[0].title} answers={currentItems[0].answer} />;
-          else questionType = <SimpleQuestion question={currentItems[0].title} answer={currentItems[0].answer} />
+          if (currentItems[0].icon) questionType = <ReactQuestion currentItem={currentItems[0]} />;
+          else questionType = <SimpleQuestion currentItem={currentItems[0]} />
         }
         break;
       case 'free_text':
-        questionType = <TextQuestion question={currentItems[0].title} />;
+        questionType = <TextQuestion currentItem={currentItems[0]} setCreateSurvey={setCreateSurvey} createSurvey={createSurvey} />;
         break;
       case 'textbox':
-        questionType = <TextQuestion question={currentItems[0].title} />;
+        questionType = <TextQuestion currentItem={currentItems[0]} setCreateSurvey={setCreateSurvey} createSurvey={createSurvey} />;
         break;
       case 'matrix':
-        questionType = <StarQuestion question={currentItems[0].title} answer={currentItems[0].answer} row={currentItems[0].row} />;
+        questionType = <StarQuestion currentItem={currentItems[0]} />;
         break;
       case 'multiple_choice':
-        questionType = <MultiQuestion question={currentItems[0].title} answer={currentItems[0].answer} />
+        questionType = <MultiQuestion currentItem={currentItems[0]} />
         break;
       default:
         break;
@@ -73,6 +105,7 @@ const Survey = () => {
     } else {
       navigate('/not-found');
     }
+
   }, [dispatch, id, navigate]);
   return (
     <>
