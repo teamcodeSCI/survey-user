@@ -21,7 +21,6 @@ import { loadedPostSurveySelector } from '@/features/survey/postSurveySlice';
 const initSurvey = {
   id: 0,
   state: '',
-
   question_id: 0,
   suggested_answer_id: 0,
   matrix_row_id: 0,
@@ -36,6 +35,7 @@ const Survey = () => {
   const [pageNum, setPageNum] = useState<number>(1);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [createSurvey, setCreateSurvey] = useState<PostSurvey>(initSurvey)
+  const [answer, setAnswer] = useState<string | number>('')
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loaded = useAppSelector(loadedSurveySelector);
@@ -77,23 +77,23 @@ const Survey = () => {
     switch (currentItems[0].question_type) {
       case 'simple_choice':
         if (currentItems[0].col_nb === '10') {
-          questionType = <NumberQuestion currentItem={currentItems[0]} setCreateSurvey={setCreateSurvey} createSurvey={createSurvey} />;
+          questionType = <NumberQuestion currentItem={currentItems[0]} answer={answer} setAnswer={setAnswer} />;
         } else {
-          if (currentItems[0].icon) questionType = <ReactQuestion currentItem={currentItems[0]} />;
-          else questionType = <SimpleQuestion currentItem={currentItems[0]} />
+          if (currentItems[0].icon) questionType = <ReactQuestion currentItem={currentItems[0]} answer={answer} setAnswer={setAnswer} />;
+          else questionType = <SimpleQuestion currentItem={currentItems[0]} answer={answer} setAnswer={setAnswer} />
         }
         break;
       case 'free_text':
-        questionType = <TextQuestion currentItem={currentItems[0]} setCreateSurvey={setCreateSurvey} createSurvey={createSurvey} />;
+        questionType = <TextQuestion currentItem={currentItems[0]} answer={answer} setAnswer={setAnswer} />;
         break;
       case 'textbox':
-        questionType = <TextQuestion currentItem={currentItems[0]} setCreateSurvey={setCreateSurvey} createSurvey={createSurvey} />;
+        questionType = <TextQuestion currentItem={currentItems[0]} answer={answer} setAnswer={setAnswer} />;
         break;
       case 'matrix':
-        questionType = <StarQuestion currentItem={currentItems[0]} />;
+        questionType = <StarQuestion currentItem={currentItems[0]} answer={answer} setAnswer={setAnswer} />;
         break;
       case 'multiple_choice':
-        questionType = <MultiQuestion currentItem={currentItems[0]} />
+        questionType = <MultiQuestion currentItem={currentItems[0]} answer={answer} setAnswer={setAnswer} />
         break;
       default:
         break;

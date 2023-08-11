@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './multiQuestion.module.scss'
 
-const MultiQuestion = ({ currentItem }: { currentItem: any }) => {
+const MultiQuestion = ({ currentItem }: { currentItem: any, answer: any, setAnswer: any }) => {
 
   return (
     <div className={style['multiQuestion']}>

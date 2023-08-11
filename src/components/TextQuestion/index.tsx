@@ -1,12 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
 import style from './textQuestion.module.scss';
-import { PostSurvey } from '@/models/survey';
 interface TextQuestionProps {
-
-  setCreateSurvey: React.Dispatch<React.SetStateAction<PostSurvey>>, createSurvey: PostSurvey, currentItem: any
-
+  currentItem: any, answer: any, setAnswer: any
 }
-const TextQuestion = ({ setCreateSurvey, createSurvey, currentItem }: TextQuestionProps) => {
+const TextQuestion = ({ currentItem }: TextQuestionProps) => {
   const [answer, setAnswer] = useState('');
   const handleAnswer = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setAnswer(e.target.value);

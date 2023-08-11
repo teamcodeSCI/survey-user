@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './simpleQuestion.module.scss'
 
-const SimpleQuestion = ({ currentItem }: { currentItem: any }) => {
+const SimpleQuestion = ({ currentItem }: { currentItem: any, answer: any, setAnswer: any }) => {
   return (
     <div className={style['simpleQuestion']}>
       <p>{currentItem.question}</p>

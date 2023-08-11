@@ -3,7 +3,7 @@ import style from './starQuestion.module.scss';
 import StarAnswer from '../StarAnswer';
 
 interface StarQuestionProps {
-  currentItem: any
+  currentItem: any, answer: any, setAnswer: any
 }
 const StarQuestion = ({ currentItem }: StarQuestionProps) => {
   const data: any = [];

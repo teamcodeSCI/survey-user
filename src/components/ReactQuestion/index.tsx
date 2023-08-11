@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './reactQuestion.module.scss';
 import { PUBLIC_URL } from '@/utils/const';
 
@@ -10,10 +10,10 @@ interface Answer {
 }
 interface ReactQuestionState {
   currentItem: any
+  answer: any, setAnswer: any
 }
 
-const ReactQuestion = ({ currentItem }: ReactQuestionState) => {
-  const [answer, setAnswer] = useState<number>(0);
+const ReactQuestion = ({ currentItem, answer, setAnswer }: ReactQuestionState) => {
   const newAnswers: any = [];
   currentItem.answer.forEach((item: any) => {
     const newAnswer: Answer & { icon: string } = {
@@ -44,7 +44,7 @@ const ReactQuestion = ({ currentItem }: ReactQuestionState) => {
     }
     newAnswers.push(newAnswer);
   });
-
+  useEffect(() => setAnswer(0), [setAnswer])
   return (
     <div className={style['react']}>
       <p>{currentItem.question}</p>
