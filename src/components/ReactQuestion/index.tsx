@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import style from './reactQuestion.module.scss';
 import { PUBLIC_URL } from '@/utils/const';
 
@@ -44,16 +44,16 @@ const ReactQuestion = ({ currentItem, answer, setAnswer }: ReactQuestionState) =
     }
     newAnswers.push(newAnswer);
   });
-  useEffect(() => setAnswer(0), [setAnswer])
+  useEffect(() => setAnswer([0]), [setAnswer])
   return (
     <div className={style['react']}>
       <p>{currentItem.question}</p>
       <div className={style['answer']}>
         {newAnswers.map((item: any) => (
           <button
-            style={item.id === answer ? { background: '#dcecff' } : {}}
+            style={item.id === answer[0] ? { background: '#dcecff' } : {}}
             key={item.id}
-            onClick={() => setAnswer(item.id)}
+            onClick={() => { setAnswer([]); setAnswer([item.id]) }}
           >
             <img width={40} height={40} src={item.icon} alt="" />
             <span>{item.value.slice(3).toLowerCase()}</span>

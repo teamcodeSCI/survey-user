@@ -14,28 +14,16 @@ import StarQuestion from '@/components/StarQuestion';
 import Loading from '@/components/Loading';
 import MultiQuestion from '@/components/MultiQuestion';
 import SimpleQuestion from '@/components/SimpleQuestion';
-import { PostSurvey } from '@/models/survey';
 import { loadedPostSurveySelector } from '@/features/survey/postSurveySlice';
 
 
-const initSurvey = {
-  id: 0,
-  state: '',
-  question_id: 0,
-  suggested_answer_id: 0,
-  matrix_row_id: 0,
-  answer_type: '',
-  value_datetime: '',
-  value_date: '',
-  value_text_box: '',
-  value_numberical_box: '',
-  value_char_box: ''
-}
+
 const Survey = () => {
   const [pageNum, setPageNum] = useState<number>(1);
   const [isStart, setIsStart] = useState<boolean>(false);
-  const [createSurvey, setCreateSurvey] = useState<PostSurvey>(initSurvey)
-  const [answer, setAnswer] = useState<string | number>('')
+
+  const [answer, setAnswer] = useState([])
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loaded = useAppSelector(loadedSurveySelector);
@@ -43,11 +31,11 @@ const Survey = () => {
   const loading = useAppSelector(loadingSurveySelector);
   const questionList = useAppSelector(questionListSelector);
 
-
   const itemPerPage = 1;
   const indexOfLastItem = pageNum * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems: any = loaded ? questionList.slice(indexOfFirstItem, indexOfLastItem) : [];
+
   const pageCount = loaded ? Math.ceil(questionList.length / itemPerPage) : 0;
   const logo = useAppSelector(logoSelector);
   const [searchParams] = useSearchParams();
@@ -69,8 +57,94 @@ const Survey = () => {
     // })))
     setIsStart(true);
   };
+
+
   const sendResult = () => {
-    navigate(`/ending?brand_code=${brandCode}`);
+    if (loaded) {
+      switch (currentItems[0].question_type) {
+        case 'simple_choice':
+          dispatch(postSurvey({
+            id: currentItems[0].survey_id,
+            state: 'skip',
+            question_id: currentItems[0].id,
+            suggested_answer_id: answer[0],
+            matrix_row_id: 0,
+            answer_type: currentItems[0].question_type,
+            value_datetime: '',
+            value_date: '',
+            value_text_box: '',
+            value_numberical_box: '',
+            value_char_box: ''
+          }))
+          break;
+        case 'free_text':
+          dispatch(postSurvey({
+            id: currentItems[0].survey_id,
+            state: 'skip',
+            question_id: currentItems[0].id,
+            suggested_answer_id: 0,
+            matrix_row_id: 0,
+            answer_type: currentItems[0].question_type,
+            value_datetime: '',
+            value_date: '',
+            value_text_box: answer[0],
+            value_numberical_box: '',
+            value_char_box: ''
+          }))
+          break;
+        case 'textbox':
+          dispatch(postSurvey({
+            id: currentItems[0].survey_id,
+            state: 'skip',
+            question_id: currentItems[0].id,
+            suggested_answer_id: 0,
+            matrix_row_id: 0,
+            answer_type: currentItems[0].question_type,
+            value_datetime: '',
+            value_date: '',
+            value_text_box: answer[0],
+            value_numberical_box: '',
+            value_char_box: ''
+          }))
+          break;
+        case 'matrix':
+          currentItems[0].row.forEach((item: any, idx: number) => {
+            dispatch(postSurvey({
+              id: currentItems[0].survey_id,
+              state: 'skip',
+              question_id: currentItems[0].id,
+              suggested_answer_id: answer[idx],
+              matrix_row_id: item.id,
+              answer_type: currentItems[0].question_type,
+              value_datetime: '',
+              value_date: '',
+              value_text_box: '',
+              value_numberical_box: '',
+              value_char_box: ''
+            }))
+          })
+          break;
+        case 'multiple_choice':
+          answer.forEach(item => dispatch(postSurvey({
+            id: currentItems[0].survey_id,
+            state: 'skip',
+            question_id: currentItems[0].id,
+            suggested_answer_id: item,
+            matrix_row_id: 0,
+            answer_type: currentItems[0].question_type,
+            value_datetime: '',
+            value_date: '',
+            value_text_box: '',
+            value_numberical_box: '',
+            value_char_box: ''
+          })))
+          break;
+        default:
+          break;
+      }
+    }
+    setAnswer([])
+    // navigate(`/ending?brand_code=${brandCode}`);
   };
   let questionType: any = '';
   if (loaded) {
@@ -122,6 +196,7 @@ const Survey = () => {
               pageCount={pageCount}
               range={pageCount}
               sendResult={sendResult}
+
             />
           </div>
         </div>

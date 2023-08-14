@@ -8,7 +8,6 @@ interface NumberQuestionProps {
 }
 const NumberQuestion = ({ currentItem, answer, setAnswer }: NumberQuestionProps) => {
   const background = useAppSelector(backgroundSelector);
-  // const [answer, setAnswer] = useState(0);
   const [hover, setHover] = useState(0);
   const data: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
@@ -18,7 +17,10 @@ const NumberQuestion = ({ currentItem, answer, setAnswer }: NumberQuestionProps)
         {data.map((item) => (
           <button
             style={item === (answer || hover) ? { background: background, color: '#fff' } : {}}
-            onClick={() => setAnswer(item)}
+            onClick={() => {
+              setAnswer([])
+              setAnswer([item])
+            }}
             onMouseEnter={() => setHover(item)}
             onMouseLeave={() => setHover(answer)}
             key={item}
@@ -27,7 +29,7 @@ const NumberQuestion = ({ currentItem, answer, setAnswer }: NumberQuestionProps)
           </button>
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 

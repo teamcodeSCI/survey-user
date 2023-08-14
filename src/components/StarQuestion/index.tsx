@@ -5,7 +5,7 @@ import StarAnswer from '../StarAnswer';
 interface StarQuestionProps {
   currentItem: any, answer: any, setAnswer: any
 }
-const StarQuestion = ({ currentItem }: StarQuestionProps) => {
+const StarQuestion = ({ currentItem, answer, setAnswer }: StarQuestionProps) => {
   const data: any = [];
 
   currentItem.row.forEach((item: any) => {
@@ -18,7 +18,7 @@ const StarQuestion = ({ currentItem }: StarQuestionProps) => {
       <p>{currentItem.title}</p>
       <div className={style['starAnswer']}>
         {data.map((item: any, idx: number) => (
-          <StarAnswer key={idx} name={item.value} answer={item.answer} />
+          <StarAnswer key={idx} name={item.value} answer={item.answer} rate={answer} setRate={setAnswer} />
         ))}
       </div>
     </div>

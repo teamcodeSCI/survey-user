@@ -6,18 +6,22 @@ const initialState = {
   loaded: false,
   loading: false,
   result: null,
+  answerList: [],
 };
 const postSurveySLice = createSlice({
   name: 'postSurvey',
   initialState,
-  reducers: {},
+  reducers: {
+    addSurvey: (state, action) => {
+      state.answerList = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(postSurvey.pending, (state, action) => {
         state.loading = true;
       })
       .addCase(postSurvey.fulfilled, (state, action: any) => {
-        
         state.loading = false;
         state.loaded = true;
         state.result = action.payload.data;

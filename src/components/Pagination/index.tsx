@@ -1,7 +1,5 @@
 import React from 'react';
 import './pagination.scss';
-import { useAppSelector } from '@/app/hooks';
-import { backgroundSelector } from '@/features/brand/brandSlice';
 interface PaginationModel {
   pageNum: number;
   setPageNum: (pageNum: number) => void;
@@ -10,7 +8,7 @@ interface PaginationModel {
   sendResult: () => void;
 }
 const Pagination = ({ pageNum, setPageNum, pageCount, range, sendResult }: PaginationModel) => {
-  const background = useAppSelector(backgroundSelector);
+
   const pagiPage = [];
   const pagiRange = pageCount <= range ? pageCount - 1 : range;
   const pagiLimitEnd = pagiRange + pageNum < pageCount ? pagiRange + pageNum : pageCount;
@@ -20,6 +18,7 @@ const Pagination = ({ pageNum, setPageNum, pageCount, range, sendResult }: Pagin
   }
   const nextPage = () => {
     if (pageNum < pageCount) setPageNum(pageNum + 1);
+    sendResult()
   };
   const prePage = () => {
     if (pageNum > 1) setPageNum(pageNum - 1);
@@ -31,7 +30,8 @@ const Pagination = ({ pageNum, setPageNum, pageCount, range, sendResult }: Pagin
         ❮❮ <span>Câu trước</span>
       </button>
       <ul className="pagination__box">
-        {pagiPage.map((item, idx) => (
+        Câu {pageNum}/{pagiPage.length}
+        {/* {pagiPage.map((item, idx) => (
           <li
             onClick={() => {
               setPageNum(Number(item));
@@ -39,7 +39,7 @@ const Pagination = ({ pageNum, setPageNum, pageCount, range, sendResult }: Pagin
             key={idx}
             style={pageNum === item ? { background: background } : { background: '' }}
           ></li>
-        ))}
+        ))} */}
       </ul>
       {pageNum === pageCount ? (
         <button className="pagination__btn" onClick={sendResult}>
