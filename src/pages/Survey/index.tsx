@@ -14,7 +14,7 @@ import StarQuestion from '@/components/StarQuestion';
 import Loading from '@/components/Loading';
 import MultiQuestion from '@/components/MultiQuestion';
 import SimpleQuestion from '@/components/SimpleQuestion';
-// import { loadedPostSurveySelector } from '@/features/survey/postSurveySlice';
+import { loadedPostSurveySelector } from '@/features/survey/postSurveySlice';
 
 
 
@@ -27,52 +27,46 @@ const Survey = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loaded = useAppSelector(loadedSurveySelector);
-  // const loadedPostSurvey = useAppSelector(loadedPostSurveySelector)
+  const loadedPostSurvey = useAppSelector(loadedPostSurveySelector)
   const loading = useAppSelector(loadingSurveySelector);
   const questionList = useAppSelector(questionListSelector);
-
-
-
 
   const itemPerPage = 1;
   const indexOfLastItem = pageNum * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems: any = loaded ? questionList.slice(indexOfFirstItem, indexOfLastItem) : [];
 
-
-
   const pageCount = loaded ? Math.ceil(questionList.length / itemPerPage) : 0;
   const logo = useAppSelector(logoSelector);
   const [searchParams] = useSearchParams();
-  // const brandCode = searchParams.get('brand_code');
+
   const id = searchParams.get('id');
   const handleIsStart: React.MouseEventHandler = () => {
-    // questionList.forEach((item: any) => dispatch(postSurvey({
-    //   id: item.survey_id,
-    //   state: 'new',
-    //   question_id: item.id,
-    //   suggested_answer_id: 0,
-    //   matrix_row_id: 0,
-    //   answer_type: '',
-    //   value_datetime: '',
-    //   value_date: '',
-    //   value_text_box: '',
-    //   value_numberical_box: '',
-    //   value_char_box: ''
-    // })))
+    questionList.forEach((item: any) => dispatch(postSurvey({
+      id: item.survey_id,
+      state: 'new',
+      question_id: item.id,
+      suggested_answer_id: 0,
+      matrix_row_id: 0,
+      answer_type: '',
+      value_datetime: '',
+      value_date: '',
+      value_text_box: '',
+      value_numberical_box: '',
+      value_char_box: ''
+    })))
     setIsStart(true);
   };
 
-
   const sendResult = () => {
+    console.log(answer[0]);
+    if (answer[0] === 0 || answer[0] === '' || !answer[0]) {
+      setError(currentItems[0].constr_error_msg)
+      return
+    }
     if (loaded) {
       switch (currentItems[0].question_type) {
-
         case 'simple_choice':
-          if (answer[0] === 0) {
-            setError(currentItems[0].constr_error_msg)
-            return
-          }
           dispatch(postSurvey({
             id: currentItems[0].survey_id,
             state: 'skip',
@@ -126,7 +120,6 @@ const Survey = () => {
           }))
           break;
         case 'matrix':
-
           currentItems[0].row.forEach((item: any, idx: number) => {
             dispatch(postSurvey({
               id: currentItems[0].survey_id,
@@ -163,7 +156,7 @@ const Survey = () => {
       }
     }
     setAnswer([])
-    // navigate(`/ending?brand_code=${brandCode}`);
+
   };
   let questionType: any = '';
   if (loaded) {
@@ -207,7 +200,8 @@ const Survey = () => {
           <div className={style['logo']}>
             <img src={logo} alt="" />
           </div>
-          {!loading ? loaded && questionType : <Loading />}
+          {!loading ? (loadedPostSurvey && loaded) && questionType : <Loading />}
+          {error !== '' && <p className={style['error']}>{error}</p>}
           <div className={style['pagination']}>
             <Pagination
               pageNum={pageNum}
@@ -215,7 +209,7 @@ const Survey = () => {
               pageCount={pageCount}
               range={pageCount}
               sendResult={sendResult}
-
+              answer={answer[0]}
             />
           </div>
         </div>
