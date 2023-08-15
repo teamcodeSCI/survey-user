@@ -14,6 +14,7 @@ interface ReactQuestionState {
 }
 
 const ReactQuestion = ({ currentItem, answer, setAnswer }: ReactQuestionState) => {
+  console.log("currentItem: ", currentItem);
   const newAnswers: any = [];
   currentItem.answer.forEach((item: any) => {
     const newAnswer: Answer & { icon: string } = {
@@ -47,7 +48,7 @@ const ReactQuestion = ({ currentItem, answer, setAnswer }: ReactQuestionState) =
   useEffect(() => setAnswer([0]), [setAnswer])
   return (
     <div className={style['react']}>
-      <p>{currentItem.question}</p>
+      <p>{currentItem.title}</p>
       <div className={style['answer']}>
         {newAnswers.map((item: any) => (
           <button

@@ -14,32 +14,37 @@ import StarQuestion from '@/components/StarQuestion';
 import Loading from '@/components/Loading';
 import MultiQuestion from '@/components/MultiQuestion';
 import SimpleQuestion from '@/components/SimpleQuestion';
-import { loadedPostSurveySelector } from '@/features/survey/postSurveySlice';
+// import { loadedPostSurveySelector } from '@/features/survey/postSurveySlice';
 
 
 
 const Survey = () => {
   const [pageNum, setPageNum] = useState<number>(1);
   const [isStart, setIsStart] = useState<boolean>(false);
-
+  const [error, setError] = useState('')
   const [answer, setAnswer] = useState([])
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loaded = useAppSelector(loadedSurveySelector);
-  const loadedPostSurvey = useAppSelector(loadedPostSurveySelector)
+  // const loadedPostSurvey = useAppSelector(loadedPostSurveySelector)
   const loading = useAppSelector(loadingSurveySelector);
   const questionList = useAppSelector(questionListSelector);
+
+
+
 
   const itemPerPage = 1;
   const indexOfLastItem = pageNum * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems: any = loaded ? questionList.slice(indexOfFirstItem, indexOfLastItem) : [];
 
+
+
   const pageCount = loaded ? Math.ceil(questionList.length / itemPerPage) : 0;
   const logo = useAppSelector(logoSelector);
   const [searchParams] = useSearchParams();
-  const brandCode = searchParams.get('brand_code');
+  // const brandCode = searchParams.get('brand_code');
   const id = searchParams.get('id');
   const handleIsStart: React.MouseEventHandler = () => {
     // questionList.forEach((item: any) => dispatch(postSurvey({
@@ -62,7 +67,12 @@ const Survey = () => {
   const sendResult = () => {
     if (loaded) {
       switch (currentItems[0].question_type) {
+
         case 'simple_choice':
+          if (answer[0] === 0) {
+            setError(currentItems[0].constr_error_msg)
+            return
+          }
           dispatch(postSurvey({
             id: currentItems[0].survey_id,
             state: 'skip',
@@ -78,6 +88,10 @@ const Survey = () => {
           }))
           break;
         case 'free_text':
+          if (answer[0] === '') {
+            setError(currentItems[0].constr_error_msg)
+            return
+          }
           dispatch(postSurvey({
             id: currentItems[0].survey_id,
             state: 'skip',
@@ -93,6 +107,10 @@ const Survey = () => {
           }))
           break;
         case 'textbox':
+          if (answer[0] === '') {
+            setError(currentItems[0].constr_error_msg)
+            return
+          }
           dispatch(postSurvey({
             id: currentItems[0].survey_id,
             state: 'skip',
@@ -108,6 +126,7 @@ const Survey = () => {
           }))
           break;
         case 'matrix':
+
           currentItems[0].row.forEach((item: any, idx: number) => {
             dispatch(postSurvey({
               id: currentItems[0].survey_id,
