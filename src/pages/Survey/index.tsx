@@ -64,6 +64,7 @@ const Survey = () => {
       setError(currentItems[0].constr_error_msg)
       return
     }
+    setError('')
     if (loaded) {
       switch (currentItems[0].question_type) {
         case 'simple_choice':
