@@ -9,23 +9,22 @@ interface NumberQuestionProps {
 const NumberQuestion = ({ currentItem, answer, setAnswer }: NumberQuestionProps) => {
   const background = useAppSelector(backgroundSelector);
   const [hover, setHover] = useState(0);
-  const data: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div className={style['numberQuestion']}>
-      <p>{currentItem.question}</p>
+      <p>{currentItem.title}</p>
       <div className={style['numberAnswer']}>
-        {data.map((item) => (
+        {currentItem.answer.map((item: any) => (
           <button
-            style={item === (answer || hover) ? { background: background, color: '#fff' } : {}}
+            style={item.id === (answer[0] || hover) ? { background: background, color: '#fff' } : {}}
             onClick={() => {
               setAnswer([])
-              setAnswer([item])
+              setAnswer([item.id])
             }}
-            onMouseEnter={() => setHover(item)}
-            onMouseLeave={() => setHover(answer)}
-            key={item}
+            onMouseEnter={() => setHover(item.id)}
+            onMouseLeave={() => setHover(answer[0])}
+            key={item.id}
           >
-            {item}
+            {item.value}
           </button>
         ))}
       </div>

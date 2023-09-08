@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import style from './multiQuestion.module.scss'
+import CheckboxAnswer from '../CheckboxAnswer'
 
 const MultiQuestion = ({ currentItem, answer, setAnswer }: { currentItem: any, answer: any, setAnswer: any }) => {
+  console.log("answer: ", answer);
 
-  const handleAnswer = (e: any) => {
-    setAnswer([...answer, e.target.value])
-  }
+
   useEffect(() => {
     setAnswer([])
   }, [setAnswer])
@@ -14,10 +14,7 @@ const MultiQuestion = ({ currentItem, answer, setAnswer }: { currentItem: any, a
       <p>{currentItem.title}</p>
       <div className={style['answer']}>
         {currentItem.answer.map((item: any, idx: number) =>
-          <div key={item.value} className={style['item']}>
-            <input type="checkbox" id={'answer' + idx} value={item.value} onChange={handleAnswer} />
-            <label htmlFor={'answer' + idx}>{item.value}</label>
-          </div>
+          <CheckboxAnswer key={item.id} item={item} idx={idx} answerArr={answer} handleAnswer={setAnswer} />
         )}
       </div>
     </div>

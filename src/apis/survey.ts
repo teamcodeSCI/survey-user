@@ -18,5 +18,5 @@ export const postSurvey = createAsyncThunk('survey/postSurvey', async (survey: P
     value_numberical_box=${survey.value_numberical_box}&
     value_char_box=${survey.value_char_box}&
     id=${survey.id}&
-    state=${survey.state}`);
+    state=${survey.state}&value_comment=${survey.value_comment || ''}`);
 });

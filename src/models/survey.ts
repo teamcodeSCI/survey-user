@@ -10,4 +10,5 @@ export interface PostSurvey {
   value_text_box: string;
   value_numberical_box: string;
   value_char_box: string;
+  value_comment?: string;
 }

@@ -14,7 +14,6 @@ interface ReactQuestionState {
 }
 
 const ReactQuestion = ({ currentItem, answer, setAnswer }: ReactQuestionState) => {
-  console.log("currentItem: ", currentItem);
   const newAnswers: any = [];
   currentItem.answer.forEach((item: any) => {
     const newAnswer: Answer & { icon: string } = {

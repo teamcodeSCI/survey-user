@@ -1,7 +1,7 @@
 import { fetchSurvey, postSurvey } from '@/apis/survey';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { loadedSurveySelector, loadingSurveySelector, questionListSelector } from '@/features/survey/surveySlice';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import style from './survey.module.scss';
 import ReactQuestion from '@/components/ReactQuestion';
@@ -34,7 +34,8 @@ const Survey = () => {
   const itemPerPage = 1;
   const indexOfLastItem = pageNum * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const currentItems: any = loaded ? questionList.slice(indexOfFirstItem, indexOfLastItem) : [];
+  const currentItems: any = useMemo(() => loaded ? questionList.slice(indexOfFirstItem, indexOfLastItem) : [], [indexOfFirstItem, loaded, questionList, indexOfLastItem])
+  // console.log("currentItems: ", currentItems);
 
   const pageCount = loaded ? Math.ceil(questionList.length / itemPerPage) : 0;
   const logo = useAppSelector(logoSelector);
@@ -42,24 +43,25 @@ const Survey = () => {
 
   const id = searchParams.get('id');
   const handleIsStart: React.MouseEventHandler = () => {
-    questionList.forEach((item: any) => dispatch(postSurvey({
-      id: item.survey_id,
-      state: 'new',
-      question_id: item.id,
-      suggested_answer_id: 0,
-      matrix_row_id: 0,
-      answer_type: '',
-      value_datetime: '',
-      value_date: '',
-      value_text_box: '',
-      value_numberical_box: '',
-      value_char_box: ''
-    })))
+    questionList.forEach((item: any) => {
+      dispatch(postSurvey({
+        id: item.survey_id,
+        state: 'new',
+        question_id: item.id,
+        suggested_answer_id: 0,
+        matrix_row_id: 0,
+        answer_type: '',
+        value_datetime: '',
+        value_date: '',
+        value_text_box: '',
+        value_numberical_box: '',
+        value_char_box: ''
+      }))
+    })
     setIsStart(true);
   };
 
   const sendResult = () => {
-    console.log(answer[0]);
     if (answer[0] === 0 || answer[0] === '' || !answer[0]) {
       setError(currentItems[0].constr_error_msg)
       return
@@ -138,19 +140,24 @@ const Survey = () => {
           })
           break;
         case 'multiple_choice':
-          answer.forEach(item => dispatch(postSurvey({
-            id: currentItems[0].survey_id,
-            state: 'skip',
-            question_id: currentItems[0].id,
-            suggested_answer_id: item,
-            matrix_row_id: 0,
-            answer_type: currentItems[0].question_type,
-            value_datetime: '',
-            value_date: '',
-            value_text_box: '',
-            value_numberical_box: '',
-            value_char_box: ''
-          })))
+          console.log(answer);
+          answer.forEach(item => {
+
+          })
+          // dispatch(postSurvey({
+          //   id: currentItems[0].survey_id,
+          //   state: 'skip',
+          //   question_id: currentItems[0].id,
+          //   suggested_answer_id: item,
+          //   matrix_row_id: 0,
+          //   answer_type: currentItems[0].question_type,
+          //   value_datetime: '',
+          //   value_date: '',
+          //   value_text_box: '',
+          //   value_numberical_box: '',
+          //   value_char_box: '',
+          //   value_comment: ''
+          // }))
           break;
         default:
           break;
@@ -189,6 +196,9 @@ const Survey = () => {
   useEffect(() => {
     if (id) {
       dispatch(fetchSurvey(Number(id)));
+      // if (currentItems.length === 0) {
+      //   navigate('/not-found');
+      // }
     } else {
       navigate('/not-found');
     }
