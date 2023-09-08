@@ -31,10 +31,6 @@ const Home = () => {
     const loading = useAppSelector(loadingSurveySelector);
     const questionList = useAppSelector(questionListSelector);
 
-
-
-
-
     const logo = useAppSelector(logoSelector);
     const [searchParams] = useSearchParams();
 

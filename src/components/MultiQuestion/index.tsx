@@ -14,12 +14,12 @@ const MultiQuestion = ({ currentItem, answer, setAnswer }: { currentItem: any, a
       <p>{currentItem.title}</p>
       <div className={style['answer']}>
         <div className={style['item']}>
-          {currentItem.answer.slice(0, 8).map((item: any, idx: number) =>
+          {currentItem.answer.slice(0, 7).map((item: any, idx: number) =>
             <CheckboxAnswer key={item.id} item={item} idx={idx} answerArr={answer} handleAnswer={setAnswer} />
           )}
         </div>
         <div className={style['item']}>
-          {currentItem.answer.slice(9, 15).map((item: any, idx: number) =>
+          {currentItem.answer.slice(8, 15).map((item: any, idx: number) =>
             <CheckboxAnswer key={item.id} item={item} idx={idx} answerArr={answer} handleAnswer={setAnswer} />
           )}
         </div>
