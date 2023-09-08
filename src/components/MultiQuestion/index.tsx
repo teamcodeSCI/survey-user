@@ -13,9 +13,17 @@ const MultiQuestion = ({ currentItem, answer, setAnswer }: { currentItem: any, a
     <div className={style['multiQuestion']}>
       <p>{currentItem.title}</p>
       <div className={style['answer']}>
-        {currentItem.answer.map((item: any, idx: number) =>
-          <CheckboxAnswer key={item.id} item={item} idx={idx} answerArr={answer} handleAnswer={setAnswer} />
-        )}
+        <div className={style['item']}>
+          {currentItem.answer.slice(0, 8).map((item: any, idx: number) =>
+            <CheckboxAnswer key={item.id} item={item} idx={idx} answerArr={answer} handleAnswer={setAnswer} />
+          )}
+        </div>
+        <div className={style['item']}>
+          {currentItem.answer.slice(9, 15).map((item: any, idx: number) =>
+            <CheckboxAnswer key={item.id} item={item} idx={idx} answerArr={answer} handleAnswer={setAnswer} />
+          )}
+        </div>
+
       </div>
     </div>
   )
