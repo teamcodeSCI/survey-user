@@ -1,7 +1,7 @@
 {
   "name": "survey-user",
   "version": "0.1.0",
-  "homepage": "https://teamcodeSCI.github.io/survey-user",
+  "homepage": "https://scigroup.com.vn/app/survey-web",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -26,8 +26,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
@@ -54,7 +52,6 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "^5.0.0",
     "customize-cra": "^1.0.0",
-    "gh-pages": "^6.0.0",
     "react-app-rewired": "^2.2.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
