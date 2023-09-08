@@ -1,7 +1,7 @@
 {
   "name": "survey-user",
   "version": "0.1.0",
-  "homepage": "https://teamcodeSCI.github.io/customer-portrait-v2",
+  "homepage": "https://teamcodeSCI.github.io/survey-user",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
