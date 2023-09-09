@@ -1,11 +1,8 @@
 .numberQuestion {
-  max-width: 800px;
-  margin: 0 auto;
-  width: 90%;
   p {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 30px;
+    font-size: 20px;
+
+    margin-bottom: 20px;
   }
   .numberAnswer {
     display: flex;
@@ -24,10 +21,6 @@
       border-radius: 4px;
       font-size: 16px;
       transition: all 0.2s linear;
-      // &:hover {
-      //   background: rgb(14, 165, 237);
-      //   color: #fff;
-      // }
     }
   }
 }

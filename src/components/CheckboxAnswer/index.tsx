@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import style from './checkboxAnswer.module.scss'
 
-const CheckboxAnswer = ({ item, idx, handleAnswer, answerArr }: { item: any, idx: number, handleAnswer: any, answerArr: any }) => {
+const CheckboxAnswer = ({ item, handleAnswer, answerArr }: { item: any, handleAnswer: any, answerArr: any }) => {
+    console.log("item: ", item);
     const [select, setIsSelect] = useState(false)
     const [answer, setAnswer] = useState({ suggested_answer_id: '', value_comment: '' })
 
@@ -17,10 +18,10 @@ const CheckboxAnswer = ({ item, idx, handleAnswer, answerArr }: { item: any, idx
     return (
         <div className={style['checkboxAnswer']}>
             <div className={style['inputGroup']}>
-                <input type="checkbox" name='suggested_answer_id' id={'answer' + idx} value={item.id} onChange={handleAnswers} />
+                <input type="checkbox" name='suggested_answer_id' id={'answer' + item.id} value={item.id} onChange={handleAnswers} />
                 <label
                     style={item.value !== "Không có ý kiến gì" ? {} : { color: 'red', fontWeight: 600 }}
-                    htmlFor={'answer' + idx}>
+                    htmlFor={'answer' + item.id}>
                     {item.value}
                 </label>
             </div>

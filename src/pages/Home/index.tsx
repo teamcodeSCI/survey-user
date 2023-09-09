@@ -108,6 +108,9 @@ const Home = () => {
                         {!loading ? (loadedPostSurvey && loaded) && questionType : <Loading />}
                         {error !== '' && <p className={style['error']}>{error}</p>}
                     </div>
+                    <div className={style['sendBtn']}>
+                        <button>Gửi kết quả</button>
+                    </div>
                 </div>
             ) : (
                 <div>

@@ -2,8 +2,9 @@
   position: relative;
 
   .main {
-    overflow: overlay;
-    height: 65vh;
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -35,19 +36,22 @@
     display: flex;
     align-items: flex-end;
   }
-  @media (max-width: 767px) {
-    height: 60vh;
-    .pagination {
-      height: auto;
+  .sendBtn {
+    text-align: center;
+    margin-top: 25px;
+    button {
+      padding: 5px 20px;
+      border-radius: 12px;
+      border: none;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 600;
     }
   }
+
   @media (max-width: 320px) {
-    height: unset;
     .logo {
       margin-bottom: 20px;
-    }
-    .pagination {
-      margin-top: 20px;
     }
   }
 }
