@@ -23,8 +23,8 @@ const Home = () => {
 
     const [isStart, setIsStart] = useState<boolean>(false);
     const [error, setError] = useState('')
-    const [answers, setAnswers] = useState<AnswerType[]>([])
-    console.log("answers: ", answers);
+    const [answers, setAnswers] = useState<AnswerType[][]>([])
+
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -77,34 +77,43 @@ const Home = () => {
         setIsStart(true);
 
     };
-    const handleAnswer = (questionIndex: number, answer: AnswerType) => {
+    const handleAnswer = (questionIndex: number, answer: AnswerType[]) => {
         const updatedAnswers = [...answers];
         updatedAnswers[questionIndex] = answer;
         setAnswers(updatedAnswers);
     };
-
+    const handleSendData = () => {
+        if (answers.length <= questionList.length) {
+            console.log('Giúp em trả lời những câu hỏi');
+        }
+        answers.forEach(item => {
+            item.forEach(e => {
+                console.log(e);
+            })
+        })
+        // dispatch(postSurvey())
+    }
     const questionType: any = [];
-
 
     if (loaded) {
         questionList.forEach((item: any, idx: number) => {
             switch (item.question_type) {
                 case 'simple_choice':
                     if (item.col_nb === '10') {
-                        questionType.push(<NumberQuestion currentItem={item} onAnswer={handleAnswer} idx={idx} />);
+                        questionType.push(<NumberQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />);
                     } else {
-                        if (item.icon) questionType.push(<ReactQuestion currentItem={item} onAnswer={handleAnswer} idx={idx} />);
-                        else questionType.push(<SimpleQuestion currentItem={item} onAnswer={handleAnswer} idx={idx} />)
+                        if (item.icon) questionType.push(<ReactQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />);
+                        else questionType.push(<SimpleQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />)
                     }
                     break;
                 case 'free_text':
-                    questionType.push(<TextQuestion currentItem={item} onAnswer={handleAnswer} idx={idx} />)
+                    questionType.push(<TextQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />)
                     break;
                 case 'textbox':
-                    questionType.push(<TextQuestion currentItem={item} onAnswer={handleAnswer} idx={idx} />);
+                    questionType.push(<TextQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />);
                     break;
                 case 'multiple_choice':
-                    questionType.push(<MultiQuestion currentItem={item} onAnswer={handleAnswer} idx={idx} />)
+                    questionType.push(<MultiQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />)
                     break;
                 default:
                     break;
@@ -135,7 +144,7 @@ const Home = () => {
                         {error !== '' && <p className={style['error']}>{error}</p>}
                     </div>
                     <div className={style['sendBtn']}>
-                        <button style={{ background: background }}>Gửi kết quả</button>
+                        <button onClick={handleSendData} style={{ background: background }}>Gửi kết quả</button>
                     </div>
                 </div>
             ) : (

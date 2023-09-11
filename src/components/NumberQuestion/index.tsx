@@ -6,7 +6,7 @@ import { AnswerType } from '@/models/survey';
 interface NumberQuestionProps {
   currentItem: any,
   idx: number,
-  onAnswer: (questionIndex: number, answer: AnswerType) => void
+  onAnswer: (answers: AnswerType[]) => void;
 }
 const NumberQuestion = ({ currentItem, idx, onAnswer }: NumberQuestionProps) => {
 
@@ -14,7 +14,7 @@ const NumberQuestion = ({ currentItem, idx, onAnswer }: NumberQuestionProps) => 
   const [hover, setHover] = useState(0);
   const [answer, setAnswer] = useState<AnswerType>({
     id: currentItem.survey_id,
-    state: 'new',
+    state: 'done',
     question_id: currentItem.id,
     suggested_answer_id: 0,
     matrix_row_id: 0,
@@ -29,7 +29,7 @@ const NumberQuestion = ({ currentItem, idx, onAnswer }: NumberQuestionProps) => 
 
   const handleAnswer = (option: AnswerType) => {
     setAnswer(option)
-    onAnswer(idx, option)
+    onAnswer(option ? [option] : [])
   }
   return (
     <div className={style['numberQuestion']}>
@@ -43,7 +43,7 @@ const NumberQuestion = ({ currentItem, idx, onAnswer }: NumberQuestionProps) => 
             onMouseLeave={() => setHover(answer.suggested_answer_id)}
             onClick={() => handleAnswer({
               id: currentItem.survey_id,
-              state: 'new',
+              state: 'done',
               question_id: currentItem.id,
               suggested_answer_id: item.id,
               matrix_row_id: 0,

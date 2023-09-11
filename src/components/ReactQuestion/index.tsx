@@ -11,13 +11,13 @@ interface Answer {
 }
 interface ReactQuestionState {
   currentItem: any, idx: number,
-  onAnswer: (questionIndex: number, answer: AnswerType) => void
+  onAnswer: (answers: AnswerType[]) => void;
 }
 
 const ReactQuestion = ({ currentItem, idx, onAnswer }: ReactQuestionState) => {
   const [answer, setAnswer] = useState<AnswerType>({
     id: currentItem.survey_id,
-    state: 'new',
+    state: 'done',
     question_id: currentItem.id,
     suggested_answer_id: 0,
     matrix_row_id: 0,
@@ -31,8 +31,7 @@ const ReactQuestion = ({ currentItem, idx, onAnswer }: ReactQuestionState) => {
   })
   const handleAnswer = (option: AnswerType) => {
     setAnswer(option)
-
-    onAnswer(idx, option)
+    onAnswer(option ? [option] : [])
   }
   const newAnswers: any = [];
   currentItem.answer.forEach((item: any) => {
@@ -75,7 +74,7 @@ const ReactQuestion = ({ currentItem, idx, onAnswer }: ReactQuestionState) => {
             key={item.id}
             onClick={() => handleAnswer({
               id: currentItem.survey_id,
-              state: 'new',
+              state: 'done',
               question_id: currentItem.id,
               suggested_answer_id: item.id,
               matrix_row_id: 0,
