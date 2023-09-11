@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import style from './reactQuestion.module.scss';
 import { PUBLIC_URL } from '@/utils/const';
+import { AnswerType } from '@/models/survey';
 
 interface Answer {
   id: number;
@@ -9,11 +10,30 @@ interface Answer {
   value_description: string;
 }
 interface ReactQuestionState {
-  currentItem: any
-  answer: any, setAnswer: any
+  currentItem: any, idx: number,
+  onAnswer: (questionIndex: number, answer: AnswerType) => void
 }
 
-const ReactQuestion = ({ currentItem, answer, setAnswer }: ReactQuestionState) => {
+const ReactQuestion = ({ currentItem, idx, onAnswer }: ReactQuestionState) => {
+  const [answer, setAnswer] = useState<AnswerType>({
+    id: currentItem.survey_id,
+    state: 'new',
+    question_id: currentItem.id,
+    suggested_answer_id: 0,
+    matrix_row_id: 0,
+    answer_type: currentItem.question_type,
+    value_datetime: '',
+    value_date: '',
+    value_text_box: '',
+    value_numberical_box: '',
+    value_char_box: '',
+    value_comment: ''
+  })
+  const handleAnswer = (option: AnswerType) => {
+    setAnswer(option)
+
+    onAnswer(idx, option)
+  }
   const newAnswers: any = [];
   currentItem.answer.forEach((item: any) => {
     const newAnswer: Answer & { icon: string } = {
@@ -44,16 +64,29 @@ const ReactQuestion = ({ currentItem, answer, setAnswer }: ReactQuestionState) =
     }
     newAnswers.push(newAnswer);
   });
-  useEffect(() => setAnswer([0]), [setAnswer])
+
   return (
     <div className={style['react']}>
       <p>{currentItem.title}</p>
       <div className={style['answer']}>
         {newAnswers.map((item: any) => (
           <button
-            style={item.id === answer[0] ? { background: '#dcecff' } : {}}
+            style={item.id === answer.suggested_answer_id ? { background: '#dcecff' } : {}}
             key={item.id}
-            onClick={() => { setAnswer([]); setAnswer([item.id]) }}
+            onClick={() => handleAnswer({
+              id: currentItem.survey_id,
+              state: 'new',
+              question_id: currentItem.id,
+              suggested_answer_id: item.id,
+              matrix_row_id: 0,
+              answer_type: currentItem.question_type,
+              value_datetime: '',
+              value_date: '',
+              value_text_box: '',
+              value_numberical_box: '',
+              value_char_box: '',
+              value_comment: ''
+            })}
           >
             <img width={40} height={40} src={item.icon} alt="" />
             <span>{item.value.slice(3).toLowerCase()}</span>
