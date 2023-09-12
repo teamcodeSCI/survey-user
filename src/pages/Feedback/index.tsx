@@ -6,7 +6,8 @@ import { Navigate, useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { createFeedback } from '@/apis/feedback';
 import { InfoState } from '@/models/feedback';
-import { loadedFeedbackSelector, resultFeedbackSelector } from '@/features/feedback/feedbackSlice';
+import { loadedFeedbackSelector, loadingFeedbackSelector, resultFeedbackSelector } from '@/features/feedback/feedbackSlice';
+import Loading from '@/components/Loading';
 
 const Feedback = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ const Feedback = () => {
   const brandCode = searchParams.get('brand_code');
   const result = useAppSelector(resultFeedbackSelector);
   const loaded = useAppSelector(loadedFeedbackSelector);
+  const loadingFeedback = useAppSelector(loadingFeedbackSelector);
   const name = useAppSelector(nameSelector);
   const backgroundColor = useAppSelector(backgroundSelector);
   const logo = useAppSelector(logoSelector);
@@ -49,6 +51,7 @@ const Feedback = () => {
         <Navigate to={`/ending?brand_code=${brandCode}`} />
       ) : (
         <div className={style['feedback']}>
+          {loadingFeedback && <Loading />}
           <div className={style['desc']}>
             <img src={logo} alt="" />
             <p>
