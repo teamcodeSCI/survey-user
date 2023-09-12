@@ -83,9 +83,10 @@ const Home = () => {
         setAnswers(updatedAnswers);
     };
     const handleSendData = () => {
-        if (answers.length <= questionList.length) {
-            console.log('Giúp em trả lời những câu hỏi');
-        }
+        // if (answers.length <= questionList.length) {
+        //     console.log('Giúp em trả lời những câu hỏi');
+        //     return
+        // }
         answers.forEach(item => {
             item.forEach(e => {
                 console.log(e);

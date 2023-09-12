@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import style from './multiQuestion.module.scss'
 import CheckboxAnswer from '../CheckboxAnswer'
 import { AnswerType } from '@/models/survey';
@@ -7,16 +7,20 @@ const MultiQuestion = ({ currentItem, onAnswer, idx }: { currentItem: any, idx: 
   const [selectedAnswers, setSelectedAnswers] = useState<AnswerType[]>([]);
 
   const handleCheckboxChange = (option: AnswerType) => {
-    const isSelected = selectedAnswers.includes(option);
 
-    if (isSelected) {
+    const isSelected = selectedAnswers.find((item: AnswerType) =>
+      item.suggested_answer_id === option.suggested_answer_id
+    )
+
+
+    if (Boolean(isSelected)) {
       // Remove the option from selectedAnswers if it's already selected
-      setSelectedAnswers(selectedAnswers.filter((selected) => selected.suggested_answer_id !== option.id));
-      onAnswer(selectedAnswers)
+      setSelectedAnswers(selectedAnswers.filter((selected) => selected.suggested_answer_id !== option.suggested_answer_id));
+      onAnswer(selectedAnswers.filter((selected) => selected.suggested_answer_id !== option.suggested_answer_id))
     } else {
       // Add the option to selectedAnswers if it's not selected
       setSelectedAnswers([...selectedAnswers, option]);
-      onAnswer(selectedAnswers)
+      onAnswer([...selectedAnswers, option])
 
     }
   };
@@ -32,7 +36,22 @@ const MultiQuestion = ({ currentItem, onAnswer, idx }: { currentItem: any, idx: 
       <p>{currentItem.title}</p>
       <div className={style['answer']}>
         <div className={style['item']}>
-          {currentItem.answer.map((item: any, idx: number) =>
+          {currentItem.answer.slice(0, 4).map((item: any, idx: number) =>
+            <CheckboxAnswer key={item.id} currentItem={currentItem} item={item} handleCheckboxChange={handleCheckboxChange} updateAnswers={updateAnswers} idx={idx} />
+          )}
+        </div>
+        <div className={style['item']}>
+          {currentItem.answer.slice(4, 8).map((item: any, idx: number) =>
+            <CheckboxAnswer key={item.id} currentItem={currentItem} item={item} handleCheckboxChange={handleCheckboxChange} updateAnswers={updateAnswers} idx={idx} />
+          )}
+        </div>
+        <div className={style['item']}>
+          {currentItem.answer.slice(8, 12).map((item: any, idx: number) =>
+            <CheckboxAnswer key={item.id} currentItem={currentItem} item={item} handleCheckboxChange={handleCheckboxChange} updateAnswers={updateAnswers} idx={idx} />
+          )}
+        </div>
+        <div className={style['item']}>
+          {currentItem.answer.slice(12, 15).map((item: any, idx: number) =>
             <CheckboxAnswer key={item.id} currentItem={currentItem} item={item} handleCheckboxChange={handleCheckboxChange} updateAnswers={updateAnswers} idx={idx} />
           )}
         </div>
