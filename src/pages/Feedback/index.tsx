@@ -23,6 +23,7 @@ const Feedback = () => {
   const backgroundColor = useAppSelector(backgroundSelector);
   const logo = useAppSelector(logoSelector);
   const phone = useAppSelector(phoneSelector);
+
   const [info, setInfo] = useState<InfoState>({
     name: '',
     phone: '',
@@ -35,11 +36,23 @@ const Feedback = () => {
     window.location.href = `tel:${phone}`;
   };
   const handleInfo = (e: any) => {
+    if (e.target.name === 'phone') {
+      const phonePattern = /^\d{10}$/;
+      const isValidPhone = phonePattern.test(e.target.value);
+      if (!isValidPhone) {
+        setError('Số điện thoại không hợp lệ !')
+      } else {
+        setError('')
+      }
+    }
     setInfo({ ...info, [e.target.name]: e.target.value });
+
   };
   const handleSave = () => {
     if (info.name === '' || info.phone === '' || info.content === '') {
       setError('Vui lòng nhập đủ thông tin !');
+      return;
+    } if (error !== '') {
       return;
     }
     setError('');

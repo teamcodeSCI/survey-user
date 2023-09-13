@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import style from './checkboxAnswer.module.scss'
 import { AnswerType } from '@/models/survey'
 
-const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers, idx }: { item: any, handleCheckboxChange: any, currentItem: any, updateAnswers: any, idx: number }) => {
+const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers, check, setCheck }:
+    { item: any, handleCheckboxChange: any, currentItem: any, updateAnswers: any, check: boolean, setCheck: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
     const [select, setIsSelect] = useState(false)
     const [answer, setAnswer] = useState<AnswerType>({
@@ -23,8 +24,10 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
     return (
         <div className={style['checkboxAnswer']}>
             <div className={style['inputGroup']}>
-                <input type="checkbox" name='suggested_answer_id' id={'answer' + item.id} value={item.id} onChange={((e: any) => {
-                    // if (e.target.checked) {
+                <input type="checkbox" name='suggested_answer_id' id={'answer' + item.id} value={item.id} checked={item.value === "Không có ý kiến gì" ? select : !check && select} onChange={((e: any) => {
+                    if (item.value === "Không có ý kiến gì") {
+                        setCheck(!check)
+                    }
                     setIsSelect(e.target.checked)
                     handleCheckboxChange({
                         id: currentItem.survey_id,
@@ -41,12 +44,7 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
                         value_comment: ''
                     })
                     setAnswer({ ...answer, suggested_answer_id: Number(e.target.value) })
-                    // } else {
-                    //     setIsSelect(e.target.checked)
-                    //     setAnswer({ ...answer, value_comment: '' })
-                    //     updateAnswers(answer.suggested_answer_id, { ...answer, value_comment: '' })
 
-                    // }
                 })} />
                 <label
                     style={item.value !== "Không có ý kiến gì" ? {} : { color: 'red', fontWeight: 600 }}
@@ -55,7 +53,7 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
                 </label>
             </div>
 
-            {select && item.value !== "Không có ý kiến gì" &&
+            {!check && select && item.value !== "Không có ý kiến gì" &&
                 <div className={style['reason']}>
                     <textarea rows={1} onChange={(e) => {
 

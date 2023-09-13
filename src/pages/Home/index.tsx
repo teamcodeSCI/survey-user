@@ -83,12 +83,13 @@ const Home = () => {
         setAnswers(updatedAnswers);
     };
     const handleSendData = () => {
-        // if (answers.length <= questionList.length) {
-        //     console.log('Giúp em trả lời những câu hỏi');
-        //     return
-        // }
+        if (answers.length < questionList.length) {
+            setError('Vui lòng trả lời hết các câu hỏi !')
+            return
+        }
         answers.forEach(item => {
             item.forEach(e => {
+                // if(e.answer_type==="multiple_choice"&&)
                 console.log(e);
             })
         })
