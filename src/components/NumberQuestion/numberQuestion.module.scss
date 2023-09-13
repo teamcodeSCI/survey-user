@@ -1,26 +1,52 @@
 .numberQuestion {
-  p {
-    font-size: 20px;
-
-    margin-bottom: 20px;
-  }
-  .numberAnswer {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    button {
-      width: 40px;
-      height: 40px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
-      background: #ccc;
-      padding: 0;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: all 0.2s linear;
+    p {
+        font-size: 20px;
+        margin-bottom: 20px;
     }
-  }
+    .numberAnswer {
+        max-width: 580px;
+        margin: 0 auto;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        button {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            background: #ccc;
+            padding: 0;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.2s linear;
+        }
+    }
+    .level {
+        max-width: 580px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+        span {
+            display: block;
+            width: fit-content;
+            white-space: nowrap;
+            color: #e94c36;
+            font-size: 14px;
+            font-weight: 600;
+            &:last-child {
+                color: #58d357;
+            }
+        }
+        p {
+            margin: 0;
+            height: 2px;
+            width: 65%;
+            background: linear-gradient(to right, #e94c36, #f59d00, #fbca43, #bbdb5b, #58d357);
+        }
+    }
 }

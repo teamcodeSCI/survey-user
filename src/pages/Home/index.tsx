@@ -103,7 +103,7 @@ const Home = () => {
             switch (item.question_type) {
                 case 'simple_choice':
                     if (item.col_nb === '10') {
-                        questionType.push(<NumberQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />);
+                        questionType.push(<NumberQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} />);
                     } else {
                         if (item.icon) questionType.push(<ReactQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />);
                         else questionType.push(<SimpleQuestion currentItem={item} onAnswer={(answer: any) => handleAnswer(idx, answer)} idx={idx} />)
@@ -127,9 +127,7 @@ const Home = () => {
     useEffect(() => {
         if (id) {
             dispatch(fetchSurvey(Number(id)));
-            // if (currentItems.length === 0) {
-            //   navigate('/not-found');
-            // }
+
         } else {
             navigate('/not-found');
         }

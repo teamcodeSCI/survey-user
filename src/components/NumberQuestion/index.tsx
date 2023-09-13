@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import style from './numberQuestion.module.scss';
-import { useAppSelector } from '@/app/hooks';
-import { backgroundSelector } from '@/features/brand/brandSlice';
+
 import { AnswerType } from '@/models/survey';
 interface NumberQuestionProps {
   currentItem: any,
-  idx: number,
   onAnswer: (answers: AnswerType[]) => void;
 }
-const NumberQuestion = ({ currentItem, idx, onAnswer }: NumberQuestionProps) => {
+const NumberQuestion = ({ currentItem, onAnswer }: NumberQuestionProps) => {
+  const color = ['#e94c36', '#e94c36', '#f59d00', '#f59d00', '#fbca43', '#fbca43', '#bbdb5b', '#bbdb5b', '#58d357', '#58d357']
 
-  const background = useAppSelector(backgroundSelector);
   const [hover, setHover] = useState(0);
   const [answer, setAnswer] = useState<AnswerType>({
     id: currentItem.survey_id,
@@ -35,10 +33,9 @@ const NumberQuestion = ({ currentItem, idx, onAnswer }: NumberQuestionProps) => 
     <div className={style['numberQuestion']}>
       <p>{currentItem.title}</p>
       <div className={style['numberAnswer']}>
-        {currentItem.answer.map((item: any) => (
+        {currentItem.answer.map((item: any, idx: number) => (
           <button
-            style={item.id === (answer.suggested_answer_id || hover) ? { background: background, color: '#fff' } : {}}
-
+            style={{ background: color[idx], opacity: item.id === (answer.suggested_answer_id || hover) ? '1' : '0.6', border: item.id === (answer.suggested_answer_id || hover) ? '2px solid #838282' : '2px solid transparent' }}
             onMouseEnter={() => setHover(item.id)}
             onMouseLeave={() => setHover(answer.suggested_answer_id)}
             onClick={() => handleAnswer({
@@ -60,6 +57,11 @@ const NumberQuestion = ({ currentItem, idx, onAnswer }: NumberQuestionProps) => 
             {item.value}
           </button>
         ))}
+      </div>
+      <div className={style['level']}>
+        <span>Chắc chắn không</span>
+        <p></p>
+        <span>Chắc chắn có</span>
       </div>
     </div >
   );

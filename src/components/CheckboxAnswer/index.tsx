@@ -47,7 +47,7 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
 
                 })} />
                 <label
-                    style={item.value !== "Không có ý kiến gì" ? {} : { color: 'red', fontWeight: 600 }}
+                    style={item.value !== "Không có ý kiến gì" ? {} : { color: '#4caf50', fontWeight: 600 }}
                     htmlFor={'answer' + item.id}>
                     {item.value}
                 </label>
