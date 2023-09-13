@@ -14,7 +14,7 @@ import Start from '@/components/Start';
 import Loading from '@/components/Loading';
 import MultiQuestion from '@/components/MultiQuestion';
 import SimpleQuestion from '@/components/SimpleQuestion';
-import { loadedPostSurveySelector } from '@/features/survey/postSurveySlice';
+import { loadedPostSurveySelector, loadingPostSurveySelector } from '@/features/survey/postSurveySlice';
 import { AnswerType } from '@/models/survey';
 
 
@@ -30,6 +30,7 @@ const Home = () => {
     const navigate = useNavigate();
     const loaded = useAppSelector(loadedSurveySelector);
     const loadedPostSurvey = useAppSelector(loadedPostSurveySelector)
+    const loadingPostSurvey = useAppSelector(loadingPostSurveySelector)
     const loading = useAppSelector(loadingSurveySelector);
     const questionList = useAppSelector(questionListSelector);
 
@@ -38,40 +39,41 @@ const Home = () => {
     const [searchParams] = useSearchParams();
 
     const id = searchParams.get('id');
+    const brandCode = searchParams.get('brand_code');
 
     const handleIsStart: React.MouseEventHandler = () => {
         questionList.forEach((item: any) => {
             if (item.question_type === 'multiple_choice') {
                 item.answer.forEach((e: any) => {
-                    // dispatch(postSurvey({
-                    //     id: item.survey_id,
-                    //     state: 'new',
-                    //     question_id: item.id,
-                    //     suggested_answer_id: e.id,
-                    //     matrix_row_id: 0,
-                    //     answer_type: '',
-                    //     value_datetime: '',
-                    //     value_date: '',
-                    //     value_text_box: '',
-                    //     value_numberical_box: '',
-                    //     value_char_box: '',
-                    //     value_comment: ''
-                    // }))
+                    dispatch(postSurvey({
+                        id: item.survey_id,
+                        state: 'new',
+                        question_id: item.id,
+                        suggested_answer_id: e.id,
+                        matrix_row_id: 0,
+                        answer_type: '',
+                        value_datetime: '',
+                        value_date: '',
+                        value_text_box: '',
+                        value_numberical_box: '',
+                        value_char_box: '',
+                        value_comment: ''
+                    }))
                 })
             } else {
-                // dispatch(postSurvey({
-                //     id: item.survey_id,
-                //     state: 'new',
-                //     question_id: item.id,
-                //     suggested_answer_id: 0,
-                //     matrix_row_id: 0,
-                //     answer_type: '',
-                //     value_datetime: '',
-                //     value_date: '',
-                //     value_text_box: '',
-                //     value_numberical_box: '',
-                //     value_char_box: ''
-                // }))
+                dispatch(postSurvey({
+                    id: item.survey_id,
+                    state: 'new',
+                    question_id: item.id,
+                    suggested_answer_id: 0,
+                    matrix_row_id: 0,
+                    answer_type: '',
+                    value_datetime: '',
+                    value_date: '',
+                    value_text_box: '',
+                    value_numberical_box: '',
+                    value_char_box: ''
+                }))
             }
         })
         setIsStart(true);
@@ -89,11 +91,10 @@ const Home = () => {
         }
         answers.forEach(item => {
             item.forEach(e => {
-                // if(e.answer_type==="multiple_choice"&&)
-                console.log(e);
+                dispatch(postSurvey(e))
             })
         })
-        // dispatch(postSurvey())
+        navigate(`/ending?brand_code=${brandCode}`)
     }
     const questionType: any = [];
 
@@ -138,11 +139,12 @@ const Home = () => {
         <>
             {isStart ? (
                 <div className={style['survey']}>
+                    {loadingPostSurvey && <Loading />}
                     <div className={style['logo']}>
                         <img src={logo} alt="" />
                     </div>
                     <div className={style['main']}>
-                        {!loading ? (loaded) && questionType.map((item: any, idx: number) => <div key={idx}>{item}</div>) : <Loading />}
+                        {!loading ? (loaded && loadedPostSurvey) && questionType.map((item: any, idx: number) => <div key={idx}>{item}</div>) : <Loading />}
                         {error !== '' && <p className={style['error']}>{error}</p>}
                     </div>
                     <div className={style['sendBtn']}>

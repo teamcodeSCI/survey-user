@@ -7,7 +7,7 @@ const MultiQuestion = ({ currentItem, onAnswer, idx }: { currentItem: any, idx: 
   const [selectedAnswers, setSelectedAnswers] = useState<AnswerType[]>([]);
   const [check, setCheck] = useState(false)
   const handleCheckboxChange = (option: AnswerType) => {
-    const isSelected = selectedAnswers.filter((item: AnswerType) =>
+    const isSelected = selectedAnswers.find((item: AnswerType) =>
       item.suggested_answer_id === option.suggested_answer_id
     )
     if (Boolean(isSelected)) {
