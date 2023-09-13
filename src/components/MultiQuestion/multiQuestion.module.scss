@@ -14,4 +14,23 @@
       gap: 5px;
     }
   }
+  @media (max-width: 767px) {
+    p {
+      font-size: 16px;
+    }
+    .answer {
+      flex-wrap: wrap;
+      gap: 5px;
+      .item {
+        width: 46%;
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    .answer {
+      .item {
+        width: 100%;
+      }
+    }
+  }
 }

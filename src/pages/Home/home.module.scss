@@ -47,6 +47,11 @@
             color: #fff;
         }
     }
+    @media (max-width: 767px) {
+        .main {
+            width: 100%;
+        }
+    }
     @media (max-width: 320px) {
         .logo {
             margin-bottom: 20px;

@@ -2,7 +2,7 @@ import { fetchSurvey, postSurvey } from '@/apis/survey';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { loadedSurveySelector, loadingSurveySelector, questionListSelector } from '@/features/survey/surveySlice';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import style from './home.module.scss';
 import ReactQuestion from '@/components/ReactQuestion';
 
@@ -42,42 +42,7 @@ const Home = () => {
     const brandCode = searchParams.get('brand_code');
 
     const handleIsStart: React.MouseEventHandler = () => {
-        questionList.forEach((item: any) => {
-            if (item.question_type === 'multiple_choice') {
-                item.answer.forEach((e: any) => {
-                    dispatch(postSurvey({
-                        id: item.survey_id,
-                        state: 'new',
-                        question_id: item.id,
-                        suggested_answer_id: e.id,
-                        matrix_row_id: 0,
-                        answer_type: '',
-                        value_datetime: '',
-                        value_date: '',
-                        value_text_box: '',
-                        value_numberical_box: '',
-                        value_char_box: '',
-                        value_comment: ''
-                    }))
-                })
-            } else {
-                dispatch(postSurvey({
-                    id: item.survey_id,
-                    state: 'new',
-                    question_id: item.id,
-                    suggested_answer_id: 0,
-                    matrix_row_id: 0,
-                    answer_type: '',
-                    value_datetime: '',
-                    value_date: '',
-                    value_text_box: '',
-                    value_numberical_box: '',
-                    value_char_box: ''
-                }))
-            }
-        })
         setIsStart(true);
-
     };
     const handleAnswer = (questionIndex: number, answer: AnswerType[]) => {
         const updatedAnswers = [...answers];
@@ -142,12 +107,13 @@ const Home = () => {
                         <img src={logo} alt="" />
                     </div>
                     <div className={style['main']}>
-                        {!loading ? (loaded && loadedPostSurvey) && questionType.map((item: any, idx: number) => <div key={idx}>{item}</div>) : <Loading />}
+                        {!loading ? (loaded) && questionType.map((item: any, idx: number) => <div key={idx}>{item}</div>) : <Loading />}
                         {error !== '' && <p className={style['error']}>{error}</p>}
                     </div>
                     <div className={style['sendBtn']}>
                         <button onClick={handleSendData} style={{ background: background }}>Gửi kết quả</button>
                     </div>
+                    {loadedPostSurvey && <Navigate to={`/ending?brand_code=${brandCode}`} />}
                 </div>
             ) : (
                 <div>
