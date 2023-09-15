@@ -11,8 +11,8 @@ const NumberQuestion = ({ currentItem, onAnswer }: NumberQuestionProps) => {
 
   const [hover, setHover] = useState(0);
   const [answer, setAnswer] = useState<AnswerType>({
-    id: currentItem.survey_id,
-    state: 'done',
+
+    skipped: false,
     question_id: currentItem.id,
     suggested_answer_id: 0,
     matrix_row_id: 0,
@@ -39,8 +39,7 @@ const NumberQuestion = ({ currentItem, onAnswer }: NumberQuestionProps) => {
             onMouseEnter={() => setHover(item.id)}
             onMouseLeave={() => setHover(answer.suggested_answer_id)}
             onClick={() => handleAnswer({
-              id: currentItem.survey_id,
-              state: 'done',
+              skipped: false,
               question_id: currentItem.id,
               suggested_answer_id: item.id,
               matrix_row_id: 0,

@@ -7,8 +7,7 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
 
     const [select, setIsSelect] = useState(false)
     const [answer, setAnswer] = useState<AnswerType>({
-        id: currentItem.survey_id,
-        state: 'done',
+        skipped: false,
         question_id: currentItem.id,
         suggested_answer_id: 0,
         matrix_row_id: 0,
@@ -19,8 +18,6 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
         value_numberical_box: '',
         value_char_box: '', value_comment: ''
     })
-
-
     return (
         <div className={style['checkboxAnswer']}>
             <div className={style['inputGroup']}>
@@ -30,8 +27,7 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
                     }
                     setIsSelect(e.target.checked)
                     handleCheckboxChange({
-                        id: currentItem.survey_id,
-                        state: 'done',
+                        skipped: false,
                         question_id: currentItem.id,
                         suggested_answer_id: Number(e.target.value),
                         matrix_row_id: 0,

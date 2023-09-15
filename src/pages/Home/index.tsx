@@ -60,7 +60,7 @@ const Home = () => {
                 newAnswers.push(e)
             })
         })
-        dispatch(postSurvey(newAnswers))
+        dispatch(postSurvey({ id: id, state: 'done', user_input_line_ids: newAnswers }))
         navigate(`/ending?brand_code=${brandCode}`)
     }
     const questionType: any = [];
