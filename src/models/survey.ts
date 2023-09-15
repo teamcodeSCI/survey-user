@@ -13,7 +13,7 @@ export interface PostSurvey {
   value_comment?: string;
 }
 export interface AnswerType {
-  skipped: boolean;
+  skipped: string;
   question_id: number;
   suggested_answer_id: number;
   matrix_row_id: number;

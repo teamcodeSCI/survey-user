@@ -16,7 +16,7 @@ interface ReactQuestionState {
 
 const ReactQuestion = ({ currentItem, idx, onAnswer }: ReactQuestionState) => {
   const [answer, setAnswer] = useState<AnswerType>({
-    skipped: false,
+    skipped: '',
     question_id: currentItem.id,
     suggested_answer_id: 0,
     matrix_row_id: 0,
@@ -72,7 +72,7 @@ const ReactQuestion = ({ currentItem, idx, onAnswer }: ReactQuestionState) => {
             style={item.id === answer.suggested_answer_id ? { background: '#dcecff' } : {}}
             key={item.id}
             onClick={() => handleAnswer({
-              skipped: false,
+              skipped: '',
               question_id: currentItem.id,
               suggested_answer_id: item.id,
               matrix_row_id: 0,

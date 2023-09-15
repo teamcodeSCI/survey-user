@@ -6,9 +6,17 @@ export const fetchSurvey = createAsyncThunk('survey/fetchSurvey', async (id: num
   return await http.get(`/get-survey?token=${TOKEN}&id=${id}`);
 });
 export const postSurvey = createAsyncThunk('survey/postSurvey', async (survey: any) => {
-  return await http.get(
-    `/create-survey-user-input-web?token=${TOKEN}&id=${survey.id}&state=${
-      survey.state
-    }&user_input_line_ids="${JSON.stringify(survey.user_input_line_ids)}"`,
-  );
+  const res = await fetch('https://dev.scigroup.com.vn/api/v1/create-survey-user-input-web', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'no-cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(survey), // body data type must match "Content-Type" header
+  });
+  return await res.json();
 });
