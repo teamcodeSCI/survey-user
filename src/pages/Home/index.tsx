@@ -54,11 +54,13 @@ const Home = () => {
             setError('Vui lòng trả lời hết các câu hỏi !')
             return
         }
+        const newAnswers: any[] = []
         answers.forEach(item => {
             item.forEach(e => {
-                dispatch(postSurvey(e))
+                newAnswers.push(e)
             })
         })
+        dispatch(postSurvey(newAnswers))
         navigate(`/ending?brand_code=${brandCode}`)
     }
     const questionType: any = [];
