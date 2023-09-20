@@ -7,7 +7,7 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
 
     const [select, setIsSelect] = useState(false)
     const [answer, setAnswer] = useState<AnswerType>({
-        skipped: '',
+        skipped: false,
         question_id: currentItem.id,
         suggested_answer_id: 0,
         matrix_row_id: 0,

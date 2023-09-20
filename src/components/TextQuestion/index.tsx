@@ -8,7 +8,7 @@ const TextQuestion = ({ currentItem, onAnswer, idx }: TextQuestionProps) => {
 
   const [answer, setAnswer] = useState<AnswerType>({
 
-    skipped: '',
+    skipped: false,
     question_id: currentItem.id,
     suggested_answer_id: 0,
     matrix_row_id: 0,
@@ -29,7 +29,7 @@ const TextQuestion = ({ currentItem, onAnswer, idx }: TextQuestionProps) => {
     <div className={style['textQuestion']}>
       <p>{currentItem.title}</p>
       <textarea rows={1} placeholder="Nhập câu trả lời ..." value={answer.value_text_box} onChange={(e) => handleAnswer({
-        skipped: '',
+        skipped: false,
         question_id: currentItem.id,
         suggested_answer_id: 0,
         matrix_row_id: 0,

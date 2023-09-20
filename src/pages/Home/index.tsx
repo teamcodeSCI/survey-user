@@ -25,7 +25,6 @@ const Home = () => {
     const [error, setError] = useState('')
     const [answers, setAnswers] = useState<AnswerType[][]>([])
 
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const loaded = useAppSelector(loadedSurveySelector);
@@ -50,18 +49,32 @@ const Home = () => {
         setAnswers(updatedAnswers);
     };
     const handleSendData = () => {
+        console.log(answers);
+        console.log(questionList);
+        let check = false
         if (answers.length < questionList.length) {
             setError('Vui lòng trả lời hết các câu hỏi !')
             return
         }
         const newAnswers: any[] = []
         answers.forEach(item => {
-            item.forEach(e => {
-                newAnswers.push(e)
-            })
+            if (item === undefined) {
+                check = true
+                setError('Vui lòng trả lời hết các câu hỏi !')
+                return
+            }
         })
-        dispatch(postSurvey({ id: id, state: 'done', user_input_line_ids: newAnswers }))
-        navigate(`/ending?brand_code=${brandCode}`)
+        if (!check) {
+            answers.forEach(item => {
+                item.forEach(e => {
+                    newAnswers.push(e)
+                })
+            })
+            dispatch(postSurvey({ id: id, state: 'done', user_input_line_ids: newAnswers }))
+            // navigate(`/ending?brand_code=${brandCode}`)
+        }
+
+
     }
     const questionType: any = [];
 
