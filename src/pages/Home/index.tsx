@@ -49,8 +49,7 @@ const Home = () => {
         setAnswers(updatedAnswers);
     };
     const handleSendData = () => {
-        console.log(answers);
-        console.log(questionList);
+
         let check = false
         if (answers.length < questionList.length) {
             setError('Vui lòng trả lời hết các câu hỏi !')
