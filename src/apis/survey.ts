@@ -6,15 +6,10 @@ export const fetchSurvey = createAsyncThunk('survey/fetchSurvey', async (id: num
   return await http.get(`/get-survey?token=${TOKEN}&id=${id}`);
 });
 export const postSurvey = createAsyncThunk('survey/postSurvey', async (survey: any) => {
-  const res = await fetch('https://dev.scigroup.com.vn/api/v1/create-survey-user-input-web', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: TOKEN,
-    },
-
-    body: JSON.stringify(survey),
-    redirect: 'follow',
-  });
-  return await res.json();
+  return await http.get(`/create-user-input-line?
+    id=${survey.id}&
+    state=${survey.state}&
+    user_input_line_ids=${JSON.stringify(survey.user_input_line_ids)}&
+    token=${TOKEN}
+  `);
 });
