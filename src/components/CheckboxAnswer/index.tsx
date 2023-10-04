@@ -53,8 +53,8 @@ const CheckboxAnswer = ({ item, handleCheckboxChange, currentItem, updateAnswers
                 <div className={style['reason']}>
                     <textarea rows={1} onChange={(e) => {
 
-                        setAnswer({ ...answer, value_comment: e.target.value })
-                        updateAnswers(answer.suggested_answer_id, { ...answer, value_comment: e.target.value })
+                        setAnswer({ ...answer, value_comment: e.target.value.replace(/[<>[\]+'"]/g, '') })
+                        updateAnswers(answer.suggested_answer_id, { ...answer, value_comment: e.target.value.replace(/[<>[\]+'"]/g, '') })
 
                     }} value={answer.value_comment} name='value_comment' placeholder='Nhập lý do...'></textarea>
                 </div>}
