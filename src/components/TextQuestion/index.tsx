@@ -36,7 +36,7 @@ const TextQuestion = ({ currentItem, onAnswer, idx }: TextQuestionProps) => {
         answer_type: currentItem.question_type,
         value_datetime: '',
         value_date: '',
-        value_text_box: e.target.value.replace(/[<>[\]+'"]/g, ''),
+        value_text_box: e.target.value.replace(/[<>[\]+'"#&]/g, ''),
         value_numberical_box: '',
         value_char_box: '',
         value_comment: ''
