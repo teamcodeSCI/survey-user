@@ -7,6 +7,6 @@ export const createFeedback = createAsyncThunk(
   'feedback/createFeedback',
   async (body: InfoState) =>
     await http.get(
-      `/create-case-survey?token=${TOKEN}&name=${body.name}&phone=${body.phone}&content=${body.content}&company_id=${body.company_id}&type=${body.type}`,
+      `/create-case-survey?token=${TOKEN}&name=${body.name?.replace(/["']/g, '')}&phone=${body.phone}&content=${body.content?.replace(/["']/g, '')}&company_id=${body.company_id}&type=${body.type}`,
     ),
 );
