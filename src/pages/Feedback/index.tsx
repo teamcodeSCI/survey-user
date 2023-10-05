@@ -82,6 +82,15 @@ const Feedback = () => {
           <div className={style['box']}>
             <span style={{ color: backgroundColor }}>Góp ý phản hồi</span>
             <div className={style['form']}>
+              <textarea
+                name="content"
+                rows={10}
+                placeholder="Nội dung phản ánh"
+                onChange={handleInfo}
+                value={info.content}
+              >
+                {info.content}
+              </textarea>
               <input
                 type="text"
                 name="name"
@@ -98,15 +107,7 @@ const Feedback = () => {
                 value={info.phone}
                 onChange={handleInfo}
               />
-              <textarea
-                name="content"
-                rows={10}
-                placeholder="Nội dung phản ánh"
-                onChange={handleInfo}
-                value={info.content}
-              >
-                {info.content}
-              </textarea>
+
             </div>
             <div className={style['btn']}>
               {error !== '' && <p>{error}</p>}
