@@ -26,7 +26,7 @@ const brandSlice = createSlice({
           break;
         case 'KN':
           state.loaded = true;
-          state.logo = `${PUBLIC_URL}/assets/logos/logoKN.svg`;
+          state.logo = `${PUBLIC_URL}/assets/logos/logoKN.png`;
           state.backgroundColor = '#d0a868';
           state.phone = '19006466';
           state.name = 'BVTM Kangnam';

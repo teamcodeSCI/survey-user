@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import style from './feedback.module.scss';
 
 import { backgroundSelector, logoSelector, nameSelector, phoneSelector } from '@/features/brand/brandSlice';
@@ -13,6 +13,9 @@ const Feedback = () => {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const type = searchParams.get('type');
+  const nameRef = useRef<HTMLInputElement>(null)
+  const phoneRef = useRef<HTMLInputElement>(null)
+  const contentRef = useRef<HTMLTextAreaElement>(null)
 
   const companyId = searchParams.get('company_id');
   const brandCode = searchParams.get('brand_code');
@@ -49,12 +52,22 @@ const Feedback = () => {
 
   };
   const handleSave = () => {
+    const infoArr = [{ data: info.name, ref: nameRef }, { data: info.phone, ref: phoneRef }, { data: info.content, ref: contentRef }]
+    infoArr.forEach((item: any) => {
+      if (item.data === '') {
+        item.ref.current.style.border = '1px solid red'
+      } else {
+        item.ref.current.style.border = '1px solid transparent'
+      }
+    })
     if (info.name === '' || info.phone === '' || info.content === '') {
       setError('Vui lòng nhập đủ thông tin !');
       return;
     } if (error !== '') {
+      setError(error);
       return;
     }
+
     setError('');
     dispatch(createFeedback(info));
   };
@@ -88,6 +101,7 @@ const Feedback = () => {
                 placeholder="Nội dung phản ánh"
                 onChange={handleInfo}
                 value={info.content}
+                ref={contentRef}
               >
                 {info.content}
               </textarea>
@@ -98,6 +112,7 @@ const Feedback = () => {
                 placeholder="Họ và tên"
                 value={info.name}
                 onChange={handleInfo}
+                ref={nameRef}
               />
               <input
                 type="text"
@@ -106,6 +121,7 @@ const Feedback = () => {
                 placeholder="Số điện thoại"
                 value={info.phone}
                 onChange={handleInfo}
+                ref={phoneRef}
               />
 
             </div>
