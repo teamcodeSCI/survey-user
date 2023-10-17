@@ -2,21 +2,24 @@
   width: 100%;
   background: #f7f7f7;
   min-height: 100vh;
-  padding: 60px 0;
+  display: flex;
+  padding:3vh 0;
   .wrapper {
-    padding: 40px 30px;
+    padding: 20px 40px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+    min-height: 456px;
   }
   @media (max-width: 767px) {
+    padding:2vh 0;
     .layout {
       margin: 0;
       padding: 40px 15px 0;
     }
     .wrapper {
-      margin: 20px 0;
       padding: 20px 15px;
+      min-height: 667px;
     }
   }
 }

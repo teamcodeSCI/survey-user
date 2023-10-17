@@ -1,7 +1,7 @@
 {
   "name": "survey-user",
   "version": "0.1.0",
-  "homepage": "https://scigroup.com.vn/app/survey-web",
+  "homepage": "https://benhvienthammykangnam.vn/app/survey",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

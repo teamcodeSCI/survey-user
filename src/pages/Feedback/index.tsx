@@ -79,7 +79,9 @@ const Feedback = () => {
         <div className={style['feedback']}>
           {loadingFeedback && <Loading />}
           <div className={style['desc']}>
-            <img src={logo} alt="" />
+            <div className={style['pc']}>
+              <img className={style['logo']} src={logo} alt="logo" />
+            </div>
             <p>
               <b> Xin chào quý khách ! </b>
               <br /> Cảm ơn Quý khách đã sử dụng dịch vụ của {name}. <br />
@@ -93,11 +95,14 @@ const Feedback = () => {
             </span>
           </div>
           <div className={style['box']}>
-            <span style={{ color: backgroundColor }}>Góp ý phản hồi</span>
+            <div className={style['mb']}>
+              <img className={style['logo']} src={logo} alt="logo" />
+            </div>
+            <span style={{ color: backgroundColor }}>Phản ánh/Góp ý của khách hàng</span>
             <div className={style['form']}>
               <textarea
                 name="content"
-                rows={10}
+                rows={6}
                 placeholder="Nội dung phản ánh"
                 onChange={handleInfo}
                 value={info.content}
