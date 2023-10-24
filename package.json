@@ -1,6 +1,6 @@
 {
   "name": "survey-user",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://benhvienthammykangnam.vn/app/survey",
   "private": true,
   "dependencies": {
